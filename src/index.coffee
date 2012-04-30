@@ -1,5 +1,6 @@
 html ->
   head ->
+    meta charset:'utf-8'
     link rel:'stylesheet', href:'style.css'
     title 'Lou\'s fantastic code toys & experiments'
   body ->
