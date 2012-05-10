@@ -1,11 +1,26 @@
 body {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+  padding: 5px;
+  background: rgba 0, 0, 0, 0;
   font-family: Helvetica, Helvetica Neue, sans-serif;
 }
 a {
   text-decoration: none;
 }
+#content {
+  float: left;
+  background: rgba(255,255,255,0.85);
+  margin: 10px;
+  padding: 10px;
+}
 table {
-  margin: 20px;
+  margin-bottom: 20px;
 }
 td {
   padding: 0 5px;
@@ -15,4 +30,10 @@ td:nth-child(odd) {
 }
 .code {
   font-family: Courier New;
+}
+canvas {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  z-index: -1;
 }
