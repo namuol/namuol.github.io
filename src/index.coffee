@@ -3,7 +3,7 @@ html ->
     meta charset:'utf-8'
     link rel:'stylesheet', href:'style.css'
     script src:'http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js'
-    script src:'http://namuol.github.com/dudlpad/lib/dudlpad.js'
+    script src:'dudlpad.min.js'
     title 'var namuol = \'Louis Acresti\';'
   body ->
     div id:'content', ->
@@ -38,6 +38,16 @@ html ->
       a href:'mailto:louis.acresti@gmail.com', 'louis.acresti@gmail.com'
      
     coffeescript ->
+      ###
+      #               #
+      #  ,d88b.d88b,  #
+      #  888coder888  #
+      #  `Y8888888Y'  #
+      #    `Y888Y'    #
+      #      `Y'      #
+      #               #
+      ###
+
       container = $('body')[0]
       width = 1920
       height = 1080
