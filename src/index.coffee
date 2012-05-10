@@ -4,6 +4,7 @@ html ->
     link rel:'stylesheet', href:'style.css'
     script src:'http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js'
     script src:'dudlpad.min.js'
+    script src:'http://lmn2.us.to:34243/socket.io/socket.io.js'
     title 'var namuol = \'Louis Acresti\';'
   body ->
     div id:'content', ->
@@ -48,10 +49,11 @@ html ->
       #               #
       ###
 
+      s = io.connect('http://lmn2.us.to:34243')
       container = $('body')[0]
       width = 1920
       height = 1080
-      window.pad = DUDLPAD.create(container, width, height)
+      pad = DUDLPAD.create(container, width, height)
       drawing = false
       mouseX = undefined
       mouseY = undefined
@@ -70,6 +72,8 @@ html ->
         if drawing
           pos = mousePos(e)
           pad.draw [ mouseX, mouseY, pos[0], pos[1] ]
+          if s.socket and s.socket.open
+            s.emit 'draw', {coords: [mouseX,mouseY,pos[0],pos[1]]}
           mouseX = pos[0]
           mouseY = pos[1]
 
@@ -85,3 +89,10 @@ html ->
         ctx.fillStyle = 'rgba(255,255,255,0.05)'
         ctx.fillRect 0,0, el.width, el.height
       , 500
+
+      s.on 'draw', (data) ->
+        pad.start [data.coords[0],data.coords[1]]
+        pad.draw data.coords
+        pad.start [data.coords[2],data.coords[3]]
+
+
