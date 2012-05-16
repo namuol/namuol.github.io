@@ -8,7 +8,15 @@ html ->
     title 'var namuol = \'Louis Acresti\';'
   body ->
     div id:'content', ->
-      table ->
+      a href:'http://github.com/namuol', 'github.com/namuol'
+      text ' - '
+      a href:'http://twitter.com/louroboros', '@louroboros'
+      text ' - '
+      a href:'mailto:louis.acresti@gmail.com', 'louis.acresti@gmail.com'
+      br ''
+      br ''
+
+      table id:'code', ->
         tbody ->
           tr ->
             td -> a href:'muniverse', 'μniverse'
@@ -31,15 +39,14 @@ html ->
           tr ->
             td -> a href:'tracktime', 'tracktime'
             td -> text 'a simple tool to track the time you spend'
+      table id:'music', ->
+        tbody ->
+          tr ->
+            td ->
 
-      a href:'http://github.com/namuol', 'github.com/namuol'
-      text ' - '
-      a href:'http://twitter.com/louroboros', '@louroboros'
-      text ' - '
-      a href:'mailto:louis.acresti@gmail.com', 'louis.acresti@gmail.com'
      
     coffeescript ->
-      ###
+      ###           ###
       #               #
       #  ,d88b.d88b,  #
       #  888coder888  #
@@ -47,7 +54,7 @@ html ->
       #    `Y888Y'    #
       #      `Y'      #
       #               #
-      ###
+      ###           ###
 
       s = io.connect('http://lmn2.us.to:34243')
       container = $('body')[0]
