@@ -4,7 +4,7 @@ html ->
     link rel:'stylesheet', href:'style.css'
     script src:'http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js'
     script src:'dudlpad.min.js'
-    script src:'http://localhost:34243/socket.io/socket.io.js'
+    script src:'http://lmn2.us.to:34243/socket.io/socket.io.js'
     title 'var namuol = \'Louis Acresti\';'
   body ->
     img id:'bg', style:'display:none'
@@ -68,7 +68,7 @@ html ->
       ]
       s = undefined
       if io?
-        s = io.connect('http://localhost:34243')
+        s = io.connect('http://lmn2.us.to:34243')
       container = $('body')[0]
       canvas = $('canvas')[0]
       bg = $('#bg')[0]
@@ -133,8 +133,8 @@ html ->
           pad.end [data.coords[2],data.coords[3]], colors[data.color]
 
       bg.onload = ->
-        if ((new Date) - start) > 250
+        if ((new Date) - start) > 1000
           $(bg).fadeIn(4000)
         else
-          $(bg).css {display:'block'}
-      bg.src = 'http://localhost:34243/bg.jpg'
+          $(bg).fadeIn(250)
+      bg.src = 'http://lmn2.us.to:34243/bg.jpg'
