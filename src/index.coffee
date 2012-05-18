@@ -4,9 +4,12 @@ html ->
     link rel:'stylesheet', href:'style.css'
     script src:'http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js'
     script src:'dudlpad.min.js'
-    script src:'http://lmn2.us.to:34243/socket.io/socket.io.js'
+    script src:'http://localhost:34243/socket.io/socket.io.js'
     title 'var namuol = \'Louis Acresti\';'
   body ->
+    img id:'bg', style:'display:none'
+    canvas width:1280, height:720, ''
+
     div id:'content', ->
       a href:'http://github.com/namuol', 'github.com/namuol'
       text ' - '
@@ -55,32 +58,52 @@ html ->
       #      `Y'      #
       #               #
       ###           ###
-
-      s = io.connect('http://lmn2.us.to:34243')
+      start = new Date
+      colors = [
+        '#043227'
+        '#097168'
+        '#ffcc88'
+        '#f4a32e'
+        '#fa482e'
+      ]
+      s = undefined
+      if io?
+        s = io.connect('http://localhost:34243')
       container = $('body')[0]
-      width = 1920
-      height = 1080
-      pad = DUDLPAD.create(container, width, height)
+      canvas = $('canvas')[0]
+      bg = $('#bg')[0]
+      width = 1280
+      height = 720
+      pad = DUDLPAD.create(canvas)
+      pad.lineWidth 4
       drawing = false
       mouseX = undefined
       mouseY = undefined
+      color = 0
       mousePos = (e) ->
         [ e.clientX, e.clientY ]
 
       $(container).mousedown (e) ->
         return if e.which != 1
+
+        color = Math.floor((Math.random()*(colors.length)))
         pos = mousePos(e)
+        pos[0]/=1.5
+        pos[1]/=1.5
         mouseX = pos[0]
         mouseY = pos[1]
         drawing = true
-        pad.start [ mouseX, mouseY ]
+        pad.start [ mouseX, mouseY ], colors[color]
 
       $(container).mousemove (e) ->
         if drawing
           pos = mousePos(e)
-          pad.draw [ mouseX, mouseY, pos[0], pos[1] ]
-          if s.socket and s.socket.open
-            s.emit 'draw', {coords: [mouseX,mouseY,pos[0],pos[1]]}
+          pos[0]/=1.5
+          pos[1]/=1.5
+          pad.draw [ mouseX, mouseY, pos[0], pos[1] ], colors[color]
+          if s?
+            if s.socket and s.socket.open
+              s.emit 'draw', {coords: [mouseX,mouseY,pos[0],pos[1]], color: color}
           mouseX = pos[0]
           mouseY = pos[1]
 
@@ -92,14 +115,26 @@ html ->
 
       el = $('canvas')[0]
       ctx = el.getContext '2d'
+      ###
       setInterval ->
         ctx.fillStyle = 'rgba(255,255,255,0.05)'
         ctx.fillRect 0,0, el.width, el.height
       , 500
+      ###
+      
+      if s?
+        s.on 'draw', (data) ->
+          return if not data.color?
+          return if data.color < 0
+          return if data.color >= colors.length
 
-      s.on 'draw', (data) ->
-        pad.start [data.coords[0],data.coords[1]]
-        pad.draw data.coords
-        pad.start [data.coords[2],data.coords[3]]
+          pad.start [data.coords[0],data.coords[1]], colors[data.color]
+          pad.draw data.coords, colors[data.color]
+          pad.end [data.coords[2],data.coords[3]], colors[data.color]
 
-
+      bg.onload = ->
+        if ((new Date) - start) > 250
+          $(bg).fadeIn(4000)
+        else
+          $(bg).css {display:'block'}
+      bg.src = 'http://localhost:34243/bg.jpg'

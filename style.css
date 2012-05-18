@@ -1,5 +1,4 @@
 body {
-  background: url("sprinkles.gif");
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -khtml-user-select: none;
@@ -8,8 +7,17 @@ body {
   -o-user-select: none;
   user-select: none;
   padding: 5px;
-  background: rgba 0, 0, 0, 0;
   font-family: Helvetica, Helvetica Neue, sans-serif;
+}
+#bg {
+  padding: 0;
+  margin: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -2;
+  width: 1920px;
+  height: 1080px;
 }
 a {
   text-decoration: none;
@@ -37,4 +45,6 @@ canvas {
   top: 0px;
   left: 0px;
   z-index: -1;
+  width: 1920px;
+  height: 1080px;
 }
