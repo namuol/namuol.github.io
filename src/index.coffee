@@ -30,6 +30,9 @@ html ->
             td -> a href:'earf-html5', 'earf'
             td -> text 'oldschool software-only terrain renderer'
           tr ->
+            td -> a href:'banal-duck', 'banal duck'
+            td -> text 'dual n-back (IQ-improving memory exercise) in the browser'
+          tr ->
             td -> a href:'http://fiddle.jshell.net/namuol/JsLC6/show/trght/', 'show me everything'
             td ->
               text 'flickr API toy. the real star of the show is '
@@ -46,6 +49,7 @@ html ->
         tbody ->
           tr ->
             td ->
+      span id:'tinymsg', 'explorers are rewarded'
 
      
     coffeescript ->

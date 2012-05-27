@@ -48,3 +48,8 @@ canvas {
   width: 1920px;
   height: 1080px;
 }
+#tinymsg {
+  font-size: 9px;
+  float: right;
+  color: #bbb;
+}
