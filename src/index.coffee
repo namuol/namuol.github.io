@@ -31,7 +31,9 @@ html ->
             td -> text 'oldschool software-only terrain renderer'
           tr ->
             td -> a href:'banal-duck', 'banal duck'
-            td -> text 'dual n-back (IQ-improving memory exercise) in the browser'
+            td ->
+              a href:'http://www.gwern.net/DNB%20FAQ', 'dual n-back'
+              text ' in the browser'
           tr ->
             td -> a href:'http://fiddle.jshell.net/namuol/JsLC6/show/trght/', 'show me everything'
             td ->
