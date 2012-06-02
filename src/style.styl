@@ -7,6 +7,17 @@ user-select()
   -o-user-select arguments
   user-select arguments
 
+text-shadow()
+  -webkit-text-shadow arguments
+  -moz-text-shadow arguments
+  text-shadow arguments
+
+transition()
+  -webkit-transition arguments
+  -moz-transition arguments
+  -o-transition arguments
+  transition arguments
+
 body
   user-select none
   padding 5px
@@ -52,6 +63,13 @@ canvas
   height 1080px
 
 #tinymsg
+  color transparent
+  transition text-shadow 1500ms
+  text-shadow 0 0 60px rgba(100,100,100,1)
   font-size 9px
   float right
-  color #bbb
+
+#tinymsg:hover
+  cursor pointer
+  transition text-shadow 1000ms
+  text-shadow 0 0 0 rgba(100,100,100,1)
