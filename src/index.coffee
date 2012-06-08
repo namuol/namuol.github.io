@@ -30,6 +30,9 @@ html ->
             td -> a href:'earf-html5', 'earf'
             td -> text 'oldschool software-only terrain renderer'
           tr ->
+            td -> a href:'selectimg', 'selectimg'
+            td -> text 'hide a "secret image" in text which is revealed when the text is selected'
+          tr ->
             td -> a href:'banal-duck', 'banal duck'
             td ->
               a href:'http://www.gwern.net/DNB%20FAQ', 'dual n-back'
