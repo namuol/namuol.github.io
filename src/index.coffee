@@ -4,7 +4,6 @@ html ->
     link rel:'stylesheet', href:'style.css'
     script src:'http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js'
     script src:'dudlpad.min.js'
-    script src:'http://lmn2.us.to:34243/socket.io/socket.io.js'
     title 'var namuol = \'Louis Acresti\';'
   body ->
     img id:'bg', style:'display:none'
@@ -76,8 +75,18 @@ html ->
         '#fa482e'
       ]
       s = undefined
-      if io?
-        s = io.connect('http://lmn2.us.to:34243')
+      
+      $.ajax
+        type: 'get'
+        url: 'http://lmn2.us.to:34243/socket.io/socket.io.js'
+        dataType: 'script'
+        success: ->
+          console.log 'loaded'
+          if io?
+            s = io.connect('http://lmn2.us.to:34243')
+        error: ->
+          console.log 'errord'
+
       container = $('body')[0]
       canvas = $('canvas')[0]
       bg = $('#bg')[0]
