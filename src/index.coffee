@@ -5,6 +5,19 @@ html ->
     script src:'http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js'
     script src:'dudlpad.min.js'
     title 'var namuol = \'Louis Acresti\';'
+    coffeescript ->
+      _gaq = _gaq or []
+      _gaq.push [ "_setAccount", "UA-33247419-1" ]
+      _gaq.push [ "_trackPageview" ]
+      (->
+        ga = document.createElement("script")
+        ga.type = "text/javascript"
+        ga.async = true
+        ga.src = (if "https:" is document.location.protocol then "https://ssl" else "http://www") + ".google-analytics.com/ga.js"
+        s = document.getElementsByTagName("script")[0]
+        s.parentNode.insertBefore ga, s
+      )()
+
   body ->
     img id:'bg', style:'display:none'
     canvas width:1280, height:720, ''
