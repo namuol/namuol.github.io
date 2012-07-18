@@ -60,6 +60,9 @@ canvas {
   font-size: 9px;
   float: right;
 }
+#tinymsg a {
+  color: transparent;
+}
 #tinymsg:hover {
   cursor: pointer;
   -webkit-transition: text-shadow 1000ms;
