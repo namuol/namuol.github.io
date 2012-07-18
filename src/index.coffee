@@ -69,7 +69,8 @@ html ->
         tbody ->
           tr ->
             td ->
-      span id:'tinymsg', 'explorers are rewarded'
+      span id:'tinymsg', ->
+        a href:'dance-like-this.html', 'explorers are rewarded'
 
      
     coffeescript ->
