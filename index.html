@@ -1,8 +1,4 @@
-<html><head><meta charset="utf-8" /><meta name="viewport" content="width=device-width; 
-initial-scale=1;
-maximum-scale=1;
-minimum-scale=1; 
-user-scalable=no;" /><link rel="stylesheet" href="style.css" /><script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script><script src="dudlpad.min.js"></script><title>var namuol = 'Louis Acresti';</title><script type="text/javascript">
+<html><head><meta charset="utf-8" /><link rel="stylesheet" href="style.css" /><script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script><script src="dudlpad.min.js"></script><title>var namuol = 'Louis Acresti';</title><script type="text/javascript">
 
   var _gaq = _gaq || [];
   _gaq.push(['_setAccount', 'UA-33247419-1']);
@@ -14,7 +10,7 @@ user-scalable=no;" /><link rel="stylesheet" href="style.css" /><script src="http
     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
   })();
 
-</script></head><body><img id="bg" style="display:none" /><div id="container"><canvas width="1280" height="720"></canvas></div><div id="content"><a href="http://github.com/namuol">github.com/namuol</a> - <a href="http://twitter.com/louroboros">@louroboros</a> - <a href="mailto:louis.acresti@gmail.com">louis.acresti@gmail.com</a><br /><br /><table id="code"><tbody><tr><td><a href="muniverse">μniverse</a></td><td>epic (tiny) 2D space-exploration game <a href="http://muniverse-game.tumblr.com/">(devlog)</a></td></tr><tr><td><a href="earf-html5">earf</a></td><td>oldschool software-only terrain renderer</td></tr><tr><td><a href="selectimg">selectimg</a></td><td>hide a "secret image" in text which is revealed when the text is selected</td></tr><tr><td><a href="banal-duck">banal duck</a></td><td><a href="http://www.gwern.net/DNB%20FAQ">dual n-back</a> in the browser</td></tr><tr><td><a href="http://fiddle.jshell.net/namuol/JsLC6/show/trght/">show me everything</a></td><td>flickr API toy. the real star of the show is <a href="http://masonry.desandro.com/">jquery masonry</a></td></tr><tr><td><a href="dudlpad">dudlpad</a></td><td>dependency-free library for doodling on a <span class="code">&lt;canvas&gt;</span></td></tr><tr><td><a href="tracktime">tracktime</a></td><td>a simple tool to track the time you spend</td></tr></tbody></table><table id="music"><tbody><tr><td></td></tr></tbody></table><span id="tinymsg">explorers are rewarded</span></div><script>var __slice = Array.prototype.slice;var __hasProp = Object.prototype.hasOwnProperty;var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };var __extends = function(child, parent) {  for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; }  function ctor() { this.constructor = child; }  ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype;  return child; };var __indexOf = Array.prototype.indexOf || function(item) {  for (var i = 0, l = this.length; i < l; i++) {    if (this[i] === item) return i;  } return -1; };(function () {
+</script></head><body><img id="bg" style="display:none" /><div id="content"><a href="http://github.com/namuol">github.com/namuol</a> - <a href="http://twitter.com/louroboros">@louroboros</a> - <a href="mailto:louis.acresti@gmail.com">louis.acresti@gmail.com</a><br /><br /><table id="code"><tbody><tr><td><a href="muniverse">μniverse</a></td><td>epic (tiny) 2D space-exploration game <a href="http://muniverse-game.tumblr.com/">(devlog)</a></td></tr><tr><td><a href="earf-html5">earf</a></td><td>oldschool software-only terrain renderer</td></tr><tr><td><a href="selectimg">selectimg</a></td><td>hide a "secret image" in text which is revealed when the text is selected</td></tr><tr><td><a href="banal-duck">banal duck</a></td><td><a href="http://www.gwern.net/DNB%20FAQ">dual n-back</a> in the browser</td></tr><tr><td><a href="http://fiddle.jshell.net/namuol/JsLC6/show/trght/">show me everything</a></td><td>flickr API toy. the real star of the show is <a href="http://masonry.desandro.com/">jquery masonry</a></td></tr><tr><td><a href="dudlpad">dudlpad</a></td><td>dependency-free library for doodling on a <span class="code">&lt;canvas&gt;</span></td></tr><tr><td><a href="tracktime">tracktime</a></td><td>a simple tool to track the time you spend</td></tr></tbody></table><table id="music"><tbody><tr><td></td></tr></tbody></table><span id="tinymsg"><a href="dance-like-this.html">explorers are rewarded</a></span></div><div id="container"><canvas width="1280" height="720"></canvas></div><script>var __slice = Array.prototype.slice;var __hasProp = Object.prototype.hasOwnProperty;var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };var __extends = function(child, parent) {  for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; }  function ctor() { this.constructor = child; }  ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype;  return child; };var __indexOf = Array.prototype.indexOf || function(item) {  for (var i = 0, l = this.length; i < l; i++) {    if (this[i] === item) return i;  } return -1; };(function () {
       /*
       */
 
@@ -67,14 +63,30 @@ user-scalable=no;" /><link rel="stylesheet" href="style.css" /><script src="http
         success: function() {
           console.log('loaded');
           if (typeof io !== "undefined" && io !== null) {
-            return s = io.connect('http://lmn2.us.to:34243');
+            s = io.connect('http://lmn2.us.to:34243');
+            if (s != null) {
+              return s.on('draw', function(data) {
+                if (!(data.color != null)) {
+                  return;
+                }
+                if (data.color < 0) {
+                  return;
+                }
+                if (data.color >= colors.length) {
+                  return;
+                }
+                pad.start([data.coords[0], data.coords[1]], colors[data.color]);
+                pad.draw(data.coords, colors[data.color]);
+                return pad.end([data.coords[2], data.coords[3]], colors[data.color]);
+              });
+            }
           }
         },
         error: function() {
           return console.log('errord');
         }
       });
-      container = $('#container')[0];
+      container = $('body')[0];
       canvas = $('canvas')[0];
       bg = $('#bg')[0];
       width = 1280;
@@ -139,22 +151,6 @@ user-scalable=no;" /><link rel="stylesheet" href="style.css" /><script src="http
             , 500
       */
 
-      if (s != null) {
-        s.on('draw', function(data) {
-          if (!(data.color != null)) {
-            return;
-          }
-          if (data.color < 0) {
-            return;
-          }
-          if (data.color >= colors.length) {
-            return;
-          }
-          pad.start([data.coords[0], data.coords[1]], colors[data.color]);
-          pad.draw(data.coords, colors[data.color]);
-          return pad.end([data.coords[2], data.coords[3]], colors[data.color]);
-        });
-      }
       bg.onload = function() {
         if (((new Date) - start) > 1000) {
           return $(bg).fadeIn(4000);

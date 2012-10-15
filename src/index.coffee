@@ -1,6 +1,7 @@
 html ->
   head ->
     meta charset:'utf-8'
+    ###
     meta
       name:'viewport'
       content:'''width=device-width; 
@@ -8,6 +9,7 @@ html ->
               maximum-scale=1;
               minimum-scale=1; 
               user-scalable=no;'''
+    ###
     link rel:'stylesheet', href:'style.css'
     script src:'http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js'
     script src:'dudlpad.min.js'
@@ -30,8 +32,6 @@ html ->
 
   body ->
     img id:'bg', style:'display:none'
-    div id:'container', ->
-      canvas width:1280, height:720, ''
 
     div id:'content', ->
       a href:'http://github.com/namuol', 'github.com/namuol'
@@ -80,6 +80,8 @@ html ->
       span id:'tinymsg', ->
         a href:'dance-like-this.html', 'explorers are rewarded'
 
+    div id:'container', ->
+      canvas width:1280, height:720, ''
      
     coffeescript ->
       ###           ###
@@ -142,10 +144,22 @@ html ->
           console.log 'loaded'
           if io?
             s = io.connect('http://lmn2.us.to:34243')
+
+            if s?
+              s.on 'draw', (data) ->
+                return if not data.color?
+                return if data.color < 0
+                return if data.color >= colors.length
+
+                pad.start [data.coords[0],data.coords[1]], colors[data.color]
+                pad.draw data.coords, colors[data.color]
+                pad.end [data.coords[2],data.coords[3]], colors[data.color]
+
+
         error: ->
           console.log 'errord'
 
-      container = $('#container')[0]
+      container = $('body')[0]
       canvas = $('canvas')[0]
       bg = $('#bg')[0]
       width = 1280
@@ -198,16 +212,6 @@ html ->
       , 500
       ###
       
-      if s?
-        s.on 'draw', (data) ->
-          return if not data.color?
-          return if data.color < 0
-          return if data.color >= colors.length
-
-          pad.start [data.coords[0],data.coords[1]], colors[data.color]
-          pad.draw data.coords, colors[data.color]
-          pad.end [data.coords[2],data.coords[3]], colors[data.color]
-
       bg.onload = ->
         if ((new Date) - start) > 1000
           $(bg).fadeIn(4000)
