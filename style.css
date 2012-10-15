@@ -40,13 +40,16 @@ td:nth-child(odd) {
 .code {
   font-family: Courier New;
 }
+#container,
 canvas {
   position: fixed;
   top: 0px;
   left: 0px;
-  z-index: -1;
   width: 1920px;
   height: 1080px;
+}
+canvas {
+  z-index: -1;
 }
 #tinymsg {
   color: transparent;

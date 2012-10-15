@@ -1,6 +1,13 @@
 html ->
   head ->
     meta charset:'utf-8'
+    meta
+      name:'viewport'
+      content:'''width=device-width; 
+              initial-scale=1;
+              maximum-scale=1;
+              minimum-scale=1; 
+              user-scalable=no;'''
     link rel:'stylesheet', href:'style.css'
     script src:'http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js'
     script src:'dudlpad.min.js'
@@ -23,7 +30,8 @@ html ->
 
   body ->
     img id:'bg', style:'display:none'
-    canvas width:1280, height:720, ''
+    div id:'container', ->
+      canvas width:1280, height:720, ''
 
     div id:'content', ->
       a href:'http://github.com/namuol', 'github.com/namuol'
@@ -82,6 +90,39 @@ html ->
       #      `Y'      #
       #               #
       ###           ###
+
+      do ->
+        touchHandler = (event) ->
+          touches = event.changedTouches
+          first = touches[0]
+          type = ""
+          switch event.type
+            when "touchstart"
+              type = "mousedown"
+            when "touchmove"
+              type = "mousemove"
+            when "touchend"
+              type = "mouseup"
+            else
+              return
+          simulatedEvent = document.createEvent("MouseEvent")
+          simulatedEvent.initMouseEvent type, true, true,
+            window, 1, first.screenX, first.screenY,
+            first.clientX, first.clientY,
+            false, false, false, false, 0, null
+
+          first.target.dispatchEvent simulatedEvent
+          event.preventDefault()
+
+        touchInit = ->
+          container = $('#container')[0]
+          container.addEventListener "touchstart", touchHandler, true
+          container.addEventListener "touchmove", touchHandler, true
+          container.addEventListener "touchend", touchHandler, true
+          container.addEventListener "touchcancel", touchHandler, true
+
+        touchInit()
+
       start = new Date
       colors = [
         '#043227'
@@ -103,7 +144,7 @@ html ->
         error: ->
           console.log 'errord'
 
-      container = $('body')[0]
+      container = $('#container')[0]
       canvas = $('canvas')[0]
       bg = $('#bg')[0]
       width = 1280
