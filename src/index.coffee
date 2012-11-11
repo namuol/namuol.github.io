@@ -45,6 +45,12 @@ html ->
       table id:'code', ->
         tbody ->
           tr ->
+            td ->
+              b -> text '* '
+              a href:'//spiffyshark.com', 'spiffyshark.com'
+            td ->
+              text 'web app for creating, importing, and editing Grooveshark playlists'
+          tr ->
             td -> a href:'muniverse', 'μniverse'
             td ->
               text 'epic (tiny) 2D space-exploration game '
