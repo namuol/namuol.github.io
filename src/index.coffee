@@ -51,11 +51,6 @@ html ->
             td ->
               text 'web app for creating, importing, and editing Grooveshark playlists'
           tr ->
-            td -> a href:'muniverse', 'μniverse'
-            td ->
-              text 'epic (tiny) 2D space-exploration game '
-              a href:'http://muniverse-game.tumblr.com/', '(devlog)'
-          tr ->
             td -> a href:'earf-html5', 'earf'
             td -> text 'oldschool software-only terrain renderer'
           tr ->
@@ -79,6 +74,12 @@ html ->
           tr ->
             td -> a href:'tracktime', 'tracktime'
             td -> text 'a simple tool to track the time you spend'
+          tr ->
+            td -> a href:'muniverse', 'μniverse (on hiatus)'
+            td ->
+              text 'epic (tiny) 2D space-exploration game '
+              a href:'http://muniverse-game.tumblr.com/', '(devlog)'
+
       table id:'music', ->
         tbody ->
           tr ->
