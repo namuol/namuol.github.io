@@ -47,6 +47,12 @@ html ->
           tr ->
             td ->
               b -> text '* '
+              a href:'//www.flog-game.com', 'FLOG'
+            td ->
+              text 'a minigolf-inspired puzzle game made for TIGSource\'s Sports compo'
+          tr ->
+            td ->
+              b -> text '* '
               a href:'//spiffyshark.com', 'spiffyshark.com'
             td ->
               text 'web app for creating, importing, and editing Grooveshark playlists'
