@@ -33,8 +33,6 @@ html ->
     """
 
   body class:'beer', ->
-    img id:'bg', style:'display:none'
-
     div id:'content', ->
       a href:'http://namuol.github.com', 'home'
       text ' - '

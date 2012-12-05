@@ -12,6 +12,8 @@ html ->
     ###
     link rel:'stylesheet', href:'style.css'
     script src:'http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js'
+    link rel:'stylesheet', href:'bootstrap/css/bootstrap.css'
+    link rel:'stylesheet', href:'bootstrap/css/bootstrap-responsive.css'
     script src:'dudlpad.min.js'
     title 'var namuol = \'Louis Acresti\';'
     text """
