@@ -57,7 +57,7 @@ html ->
             input name:"_charset_", type:"hidden", value:"utf-8"
             div class:'input-prepend input-append', ->
               span class:'add-on currency', '$'
-              input id:'buy-now-amt', name:"item_price_1", type:"text", value:"5.00"
+              input id:'buy-now-amt', name:"item_price_1", type:"text", value:"1.00"
               span id:'buy-now-wrap', class:'add-on', ->
                 input alt:"", src:"https://checkout.google.com/buttons/buy.gif?merchant_id=211159781209062&amp;w=117&amp;h=48&amp;style=trans&amp;variant=text&amp;loc=en_US", type:"image"
 
