@@ -9,6 +9,19 @@ body {
   padding: 5px;
   font-family: Helvetica, Helvetica Neue, sans-serif;
 }
+body.beer {
+  -webkit-touch-callout: normal;
+  -webkit-user-select: normal;
+  -khtml-user-select: normal;
+  -moz-user-select: normal;
+  -ms-user-select: normal;
+  -o-user-select: normal;
+  user-select: normal;
+  padding: 20px;
+}
+body.beer section {
+  padding: 5px;
+}
 #bg {
   padding: 0;
   margin: 0;
@@ -77,4 +90,17 @@ canvas {
   -webkit-text-shadow: 0 0 0 #646464;
   -moz-text-shadow: 0 0 0 #646464;
   text-shadow: 0 0 0 #646464;
+}
+#buy-now-wrap {
+  background: transparent;
+  border: none;
+  padding: 0;
+}
+#buy-now-wrap > input {
+  margin-top: -2px;
+}
+#buy-now-amt {
+  width: 60px;
+  box-sizing: border-box;
+  height: 30px;
 }

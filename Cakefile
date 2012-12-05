@@ -14,6 +14,9 @@ task 'build', 'Create compiled HTML/CSS output', ->
   result = ck.render fs.readFileSync('src/index.coffee', 'utf-8')
   fs.writeFileSync 'index.html', result
 
+  result = ck.render fs.readFileSync('src/beer.coffee', 'utf-8')
+  fs.writeFileSync 'beer.html', result
+
   console.log 'building css'
   stylus.render fs.readFileSync('src/style.styl','utf-8'), {filename: 'style.css'}, (err, css) ->
     fs.writeFileSync 'style.css', css
