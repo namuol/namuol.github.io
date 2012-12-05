@@ -39,6 +39,8 @@ html ->
       a href:'http://twitter.com/louroboros', '@louroboros'
       text ' - '
       a href:'mailto:louis.acresti@gmail.com', 'louis.acresti@gmail.com'
+      text ' - '
+      a href:'http://namuol.github.com/beer.html', 'buy me a beer'
       br ''
       br ''
 
