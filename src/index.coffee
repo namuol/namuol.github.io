@@ -42,7 +42,7 @@ html ->
       text ' - '
       a href:'mailto:louis.acresti@gmail.com', 'louis.acresti@gmail.com'
       text ' - '
-      a href:'http://namuol.github.com/beer.html', 'buy me a beer'
+      a href:'beer.html', 'buy me a beer'
       br ''
       br ''
 

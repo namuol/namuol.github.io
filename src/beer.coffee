@@ -34,7 +34,7 @@ html ->
 
   body class:'beer', ->
     div id:'content', ->
-      a href:'http://namuol.github.com', 'home'
+      a href:'/', 'home'
       text ' - '
       a href:'http://github.com/namuol', 'github.com/namuol'
       text ' - '
@@ -44,13 +44,19 @@ html ->
       br ''
       br ''
 
-      h1 'Buy me a Beer'
       section ->
         p ->
-          text 'Some people see ads as a "necessary evil" but I tend to disagree. Thank you for reaffirming that!'
+          text 'By clicking that button down there, you encourage me to make more nice things. You also pay my hosting bills and help put decent beer in my fridge.'
+          br ''
+          text 'If you need something in return, I promise not to haunt you when I die of misery from working a horrible office job for the rest of my life.'
+          br ''
+          br ''
+          text 'Cheers!'
+          br ''
+          text '&nbsp;&nbsp;&nbsp;&nbsp;-Lou'
         p ->
           form action:"https://checkout.google.com/api/checkout/v2/checkoutForm/Merchant/211159781209062", id:"BB_BuyButtonForm", method:"post", name:"BB_BuyButtonForm", target:"_top", ->
-            input name:"item_name_1", type:"hidden", value:"Thank You, Have a Pint on me"
+            input name:"item_name_1", type:"hidden", value:"Thank You for the nice thing(s)"
             input name:"item_description_1", type:"hidden", value:""
             input name:"item_quantity_1", type:"hidden", value:"1"
             input name:"item_currency_1", type:"hidden", value:"USD"
