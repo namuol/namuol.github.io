@@ -46,9 +46,13 @@ html ->
 
       section ->
         p ->
-          text 'By clicking that button down there, you encourage me to make more nice things. You also pay my hosting bills and help put decent beer in my fridge.'
+          text 'By clicking that button down there, you encourage me to make more nice things. You also pay my hosting bills and maybe even help put decent beer in my fridge.'
           br ''
-          text 'If you need something in return, I promise not to haunt you when I die of misery from working a horrible office job for the rest of my life, because I\'ll have been making games for you to play instead.'
+          br ''
+          text 'If you want some numbers, it costs me about $0.001 of hosting fees each time someone plays <a href="http://www.flog-game.com">FLOG</a>, which means $1.00 covers 1000 plays.'
+          br ''
+          br ''
+          text 'Thus, I can keep the site ad-free as long as 1/1000 people contribute a dollar or more.'
           br ''
           br ''
           text 'Cheers!'
