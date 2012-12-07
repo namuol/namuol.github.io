@@ -59,21 +59,19 @@ html ->
           text '&nbsp;&nbsp;&nbsp;&nbsp;-Lou'
         p ->
           form action:"https://checkout.google.com/api/checkout/v2/checkoutForm/Merchant/211159781209062", id:"BB_BuyButtonForm", method:"post", name:"BB_BuyButtonForm", target:"_top", ->
-            input name:"item_name_1", type:"hidden", value:"Thank You for the nice thing(s)"
-            input name:"item_description_1", type:"hidden", value:""
-            input name:"item_quantity_1", type:"hidden", value:"1"
-            input name:"item_currency_1", type:"hidden", value:"USD"
             text '''
-            <input type="hidden"
-              name="shopping-cart.items.item-1.digital-content.display-disposition"
-              value="OPTIMISTIC"/>
-            <input type="hidden"
-              name="shopping-cart.items.item-1.digital-content.description"
-              value="Thank you!"/>
+              <input name="item_name_1" type="hidden" value="Thank you for the nice thing(s)"/>
+              <input name="item_description_1" type="hidden" value=""/>
+              <input name="item_quantity_1" type="hidden" value="1"/>
+              <input name="item_currency_1" type="hidden" value="USD"/>
+              <input name="shopping-cart.items.item-1.digital-content.description" type="hidden" value="Thank you!"/>
+              <input name="shopping-cart.items.item-1.digital-content.key" type="hidden" value="YDMLdPzYzuOmcg78NJ5UWXJicq5hhSqdkXhN+Q+nhe4="/>
+              <input name="shopping-cart.items.item-1.digital-content.key.is-encrypted" type="hidden" value="true"/>
+              <input name="shopping-cart.items.item-1.digital-content.url" type="hidden" value="http://namuol.github.com/thanks.html"/>
+              <input name="_charset_" type="hidden" value="utf-8"/>
             '''
-            input name:"_charset_", type:"hidden", value:"utf-8"
             div class:'input-prepend input-append', ->
-              span class:'add-on currency', '$'
+              span class:'add-on currency', 'USD $'
               input id:'buy-now-amt', name:"item_price_1", type:"text", value:"1.00"
               span id:'buy-now-wrap', class:'add-on', ->
                 input alt:"", src:"https://checkout.google.com/buttons/buy.gif?merchant_id=211159781209062&amp;w=117&amp;h=48&amp;style=trans&amp;variant=text&amp;loc=en_US", type:"image"
