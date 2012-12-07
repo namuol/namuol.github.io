@@ -48,7 +48,7 @@ html ->
         p ->
           text 'By clicking that button down there, you encourage me to make more nice things. You also pay my hosting bills and help put decent beer in my fridge.'
           br ''
-          text 'If you need something in return, I promise not to haunt you when I die of misery from working a horrible office job for the rest of my life.'
+          text 'If you need something in return, I promise not to haunt you when I die of misery from working a horrible office job for the rest of my life, because I\'ll have been making games for you to play instead.'
           br ''
           br ''
           text 'Cheers!'
@@ -60,6 +60,14 @@ html ->
             input name:"item_description_1", type:"hidden", value:""
             input name:"item_quantity_1", type:"hidden", value:"1"
             input name:"item_currency_1", type:"hidden", value:"USD"
+            text '''
+            <input type="hidden"
+              name="shopping-cart.items.item-1.digital-content.display-disposition"
+              value="OPTIMISTIC"/>
+            <input type="hidden"
+              name="shopping-cart.items.item-1.digital-content.description"
+              value="Thank you for reaffirming my faith in humanity!"/>
+            '''
             input name:"_charset_", type:"hidden", value:"utf-8"
             div class:'input-prepend input-append', ->
               span class:'add-on currency', '$'
