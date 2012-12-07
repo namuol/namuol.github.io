@@ -69,7 +69,7 @@ html ->
               value="OPTIMISTIC"/>
             <input type="hidden"
               name="shopping-cart.items.item-1.digital-content.description"
-              value="Thank you for reaffirming my faith in humanity!"/>
+              value="Thank you!"/>
             '''
             input name:"_charset_", type:"hidden", value:"utf-8"
             div class:'input-prepend input-append', ->
