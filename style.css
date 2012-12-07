@@ -9,6 +9,15 @@ body {
   padding: 5px;
   font-family: Helvetica, Helvetica Neue, sans-serif;
 }
+body.beer {
+  -webkit-touch-callout: text;
+  -webkit-user-select: text;
+  -khtml-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  -o-user-select: text;
+  user-select: text;
+}
 body.beer section {
   padding: 5px;
 }
