@@ -15,7 +15,7 @@ html ->
     script src:'dudlpad.min.js'
     link rel:'stylesheet', href:'bootstrap/css/bootstrap.css'
     link rel:'stylesheet', href:'bootstrap/css/bootstrap-responsive.css'
-    title 'Buy me a Beer'
+    title '♥ thanks'
     text """
       <script type="text/javascript">
 
@@ -32,7 +32,7 @@ html ->
       </script>
     """
 
-  body class:'beer', ->
+  body class:'thanks', ->
     div id:'content', ->
       a href:'/', 'home'
       text ' - '
@@ -48,4 +48,3 @@ html ->
       section ->
         p class:'thanks_text', ->
           text 'Thank you for your support!'
-        img class:'thanks_guy', src:'happy.png'

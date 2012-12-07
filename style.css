@@ -21,13 +21,14 @@ body.beer {
 body.beer section {
   padding: 5px;
 }
-#bg {
+img#bg {
   padding: 0;
   margin: 0;
   position: fixed;
   top: 0;
   left: 0;
   z-index: -2;
+  max-width: 1920px;
   width: 1920px;
   height: 1080px;
 }
@@ -107,6 +108,10 @@ canvas {
   float: left;
   font-size: 32px;
 }
-.thanks_guy {
-  float: right;
+body.thanks {
+  background: url("happy.png") no-repeat center center fixed;
+  -webkit-background-size: contain;
+  -moz-background-size: contain;
+  -o-background-size: contain;
+  background-size: contain;
 }

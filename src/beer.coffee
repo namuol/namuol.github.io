@@ -58,21 +58,80 @@ html ->
           br ''
           text '&nbsp;&nbsp;&nbsp;&nbsp;-Lou'
         p ->
-          form action:"https://checkout.google.com/api/checkout/v2/checkoutForm/Merchant/211159781209062", id:"BB_BuyButtonForm", method:"post", name:"BB_BuyButtonForm", target:"_top", ->
+          ###
+          text '''
+<form method="POST"
+    action="https://checkout.google.com/api/checkout/v2/checkoutForm/Merchant/211159781209062"
+    accept-charset="utf-8">
+
+  <input type="hidden" name="item_name_1" value="Thank You"/>
+  <input type="hidden" name="item_description_1" value="You are awesome."/>
+  <input type="hidden" name="item_currency_1" value="USD"/>
+  <input type="hidden" name="item_quantity_1" value="1"/>
+
+  <input type="hidden"
+    name="shopping-cart.items.item-1.digital-content.display-disposition"
+    value="OPTIMISTIC"/>
+  <input type="hidden"
+    name="shopping-cart.items.item-1.digital-content.description"
+    value="&amp;lt;a href="http://namuol.github.com/thanks.html"&amp;gt;Thank You!&amp;lt;/a&amp;gt;."/>
+
+  <input type="hidden" name="_charset_"/>
+  <div class="input-prepend input-append">
+    <span class='add-on currency'>USD $</span>
+    <input id='buy-now-amt' type="text" name="item_price_1" value="1.00"/><span id='buy-now-wrap' class='add-on'><input type="image" name="Google Checkout"
+        src="http://checkout.google.com/buttons/buy.gif?merchant_id=211159781209062&amp;w=117&amp;h=48&amp;style=trans&amp;variant=text&amp;loc=en_US"
+        height="46" width="180"/></span>
+  </div>
+</form>
+          '''
+
+          text '''
+<form method="POST"
+    action="https://sandbox.google.com/checkout/api/checkout/v2/checkoutForm/Merchant/347935588011983"
+    accept-charset="utf-8">
+
+  <input type="hidden" name="item_name_1" value="Super Software 5000"/>
+  <input type="hidden" name="item_description_1" value="Improves download speeds!"/>
+  <input type="hidden" name="item_price_1" value="1.00"/>
+  <input type="hidden" name="item_currency_1" value="USD"/>
+  <input type="hidden" name="item_quantity_1" value="1"/>
+
+  <input type="hidden"
+    name="shopping-cart.items.item-1.digital-content.display-disposition"
+    value="OPTIMISTIC"/>
+  <input type="hidden"
+    name="shopping-cart.items.item-1.digital-content.description"
+    value="&amp;lt;a href="http://namuol.github.com/thanks.html"&amp;gt;Thank You!&amp;lt;/a&amp;gt;."/>
+
+  <input type="hidden" name="_charset_"/>
+  <input type="image" name="Google Checkout"
+    src="http://sandbox.google.com/checkout/buttons/checkout.gif?merchant_id=347935588011983&w=180&h=46&style=white&variant=text&loc=en_US"
+    height="46" width="180"/>
+</form>
+          '''
+          ###
+          action1 = "https://checkout.google.com/api/checkout/v2/checkoutForm/Merchant/211159781209062"
+          action2 = "https://sandbox.google.com/checkout/api/checkout/v2/checkoutForm/Merchant/347935588011983"
+          form action:action1, id:"BB_BuyButtonForm", method:"post", name:"BB_BuyButtonForm", target:"_top", ->
             text '''
               <input name="item_name_1" type="hidden" value="Thank you for the nice thing(s)"/>
               <input name="item_description_1" type="hidden" value=""/>
               <input name="item_quantity_1" type="hidden" value="1"/>
               <input name="item_currency_1" type="hidden" value="USD"/>
-              <input name="shopping-cart.items.item-1.digital-content.description" type="hidden" value="Thank you!"/>
-              <input name="shopping-cart.items.item-1.digital-content.key" type="hidden" value="YDMLdPzYzuOmcg78NJ5UWXJicq5hhSqdkXhN+Q+nhe4="/>
-              <input name="shopping-cart.items.item-1.digital-content.key.is-encrypted" type="hidden" value="true"/>
-              <input name="shopping-cart.items.item-1.digital-content.url" type="hidden" value="http://namuol.github.com/thanks.html"/>
+              <input type="hidden"
+                name="shopping-cart.items.item-1.digital-content.display-disposition"
+                value="OPTIMISTIC"/>
+              <input type="hidden"
+                name="shopping-cart.items.item-1.digital-content.description"
+                value="<a href='http://namuol.github.com/thanks.html'>Thank You!</a>"/>
               <input name="_charset_" type="hidden" value="utf-8"/>
             '''
             div class:'input-prepend input-append', ->
               span class:'add-on currency', 'USD $'
               input id:'buy-now-amt', name:"item_price_1", type:"text", value:"1.00"
               span id:'buy-now-wrap', class:'add-on', ->
-                input alt:"", src:"https://checkout.google.com/buttons/buy.gif?merchant_id=211159781209062&amp;w=117&amp;h=48&amp;style=trans&amp;variant=text&amp;loc=en_US", type:"image"
-
+                input
+                  alt:""
+                  src:"https://checkout.google.com/buttons/buy.gif?merchant_id=347935588011983&amp;w=117&amp;h=48&amp;style=trans&amp;variant=text&amp;loc=en_US"
+                  type:"image"
