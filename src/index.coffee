@@ -61,6 +61,11 @@ html ->
             td ->
               text 'web app for creating, importing, and editing Grooveshark playlists'
           tr ->
+            td ->
+              a href:'//blind-snake.s3-website-us-east-1.amazonaws.com', 'blind snake'
+            td ->
+              text '3-hour game for <a href="//onegameamonth.com">#1GAM</a>; a spin on the classic, <i>snake</i>'
+          tr ->
             td -> a href:'earf-html5', 'earf'
             td -> text 'oldschool software-only terrain renderer'
           tr ->
