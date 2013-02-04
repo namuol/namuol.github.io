@@ -36,6 +36,8 @@ html ->
     img id:'bg', style:'display:none'
 
     div id:'content', ->
+      a href:'http://namuol.tumblr.com/', 'blog'
+      text ' - '
       a href:'http://github.com/namuol', 'github.com/namuol'
       text ' - '
       a href:'http://twitter.com/louroboros', '@louroboros'
