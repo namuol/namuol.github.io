@@ -10,11 +10,11 @@ html ->
               minimum-scale=1; 
               user-scalable=no;'''
     ###
-    link rel:'stylesheet', href:'style.css'
     script src:'http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js'
     script src:'dudlpad.min.js'
     link rel:'stylesheet', href:'bootstrap/css/bootstrap.css'
     link rel:'stylesheet', href:'bootstrap/css/bootstrap-responsive.css'
+    link rel:'stylesheet', href:'style.css'
     title 'Buy me a Beer'
     text """
       <script type="text/javascript">

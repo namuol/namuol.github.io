@@ -28,6 +28,8 @@ body
   user-select none
   padding 5px
   font-family Helvetica, Helvetica Neue, sans-serif
+  width 720px
+  margin auto
 
 body.beer
   user-select text
@@ -49,10 +51,11 @@ img#bg
 a
   text-decoration none
 
+a:hover
+  text-decoration none
+
 #content
-  position fixed
   z-index 3
-  float left
   background rgba(255,255,255,0.85)
   margin 10px
   padding 10px
@@ -75,6 +78,7 @@ td:nth-child(odd)
   left 0px
   width 1920px
   height 1080px
+  z-index -1
 
 canvas
   z-index -1
