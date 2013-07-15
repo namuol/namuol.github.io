@@ -78,19 +78,19 @@ html ->
             td ->
               a href:'http://www.gwern.net/DNB%20FAQ', 'dual n-back'
               text ' in the browser'
-          tr ->
-            td -> a href:'http://fiddle.jshell.net/namuol/JsLC6/show/trght/', 'show me everything'
-            td ->
-              text 'flickr API toy. the real star of the show is '
-              a href:'http://masonry.desandro.com/', 'jquery masonry'
-          tr ->
-            td -> a href:'dudlpad', 'dudlpad'
-            td ->
-              text 'dependency-free library for doodling on a '
-              span class:'code', '&lt;canvas&gt;'
-          tr ->
-            td -> a href:'tracktime', 'tracktime'
-            td -> text 'a simple tool to track the time you spend'
+          # tr ->
+          #   td -> a href:'http://fiddle.jshell.net/namuol/JsLC6/show/trght/', 'show me everything'
+          #   td ->
+          #     text 'flickr API toy. the real star of the show is '
+          #     a href:'http://masonry.desandro.com/', 'jquery masonry'
+          # tr ->
+          #   td -> a href:'dudlpad', 'dudlpad'
+          #   td ->
+          #     text 'dependency-free library for doodling on a '
+          #     span class:'code', '&lt;canvas&gt;'
+          # tr ->
+          #   td -> a href:'tracktime', 'tracktime'
+          #   td -> text 'a simple tool to track the time you spend'
           tr ->
             td -> a href:'muniverse', 'μniverse (on hiatus)'
             td ->
