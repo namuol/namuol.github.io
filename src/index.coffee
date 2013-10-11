@@ -56,12 +56,12 @@ html ->
               a href:'//www.flog-game.com', 'FLOG'
             td ->
               text 'a minigolf-inspired puzzle game made for TIGSource\'s Sports compo'
-          tr ->
-            td ->
-              b -> text '* '
-              a href:'//spiffyshark.com', 'spiffyshark.com'
-            td ->
-              text 'web app for creating, importing, and editing Grooveshark playlists'
+          # tr ->
+          #   td ->
+          #     b -> text '* '
+          #     a href:'//spiffyshark.com', 'spiffyshark.com'
+          #   td ->
+          #     text 'web app for creating, importing, and editing Grooveshark playlists'
           tr ->
             td ->
               a href:'//blind-snake.s3-website-us-east-1.amazonaws.com', 'blind snake'
@@ -160,28 +160,28 @@ html ->
       ]
       s = undefined
       
-      $.ajax
-        type: 'get'
-        url: 'http://lmn2.us.to:34243/socket.io/socket.io.js'
-        dataType: 'script'
-        success: ->
-          console.log 'loaded'
-          if io?
-            s = io.connect('http://lmn2.us.to:34243')
+      # $.ajax
+      #   type: 'get'
+      #   url: 'http://lmn2.us.to:34243/socket.io/socket.io.js'
+      #   dataType: 'script'
+      #   success: ->
+      #     console.log 'loaded'
+      #     if io?
+      #       s = io.connect('http://lmn2.us.to:34243')
 
-            if s?
-              s.on 'draw', (data) ->
-                return if not data.color?
-                return if data.color < 0
-                return if data.color >= colors.length
+      #       if s?
+      #         s.on 'draw', (data) ->
+      #           return if not data.color?
+      #           return if data.color < 0
+      #           return if data.color >= colors.length
 
-                pad.start [data.coords[0],data.coords[1]], colors[data.color]
-                pad.draw data.coords, colors[data.color]
-                pad.end [data.coords[2],data.coords[3]], colors[data.color]
+      #           pad.start [data.coords[0],data.coords[1]], colors[data.color]
+      #           pad.draw data.coords, colors[data.color]
+      #           pad.end [data.coords[2],data.coords[3]], colors[data.color]
 
 
-        error: ->
-          console.log 'errord'
+      #   error: ->
+      #     console.log 'errord'
 
       container = $('body')[0]
       canvas = $('canvas')[0]
@@ -236,9 +236,9 @@ html ->
       , 500
       ###
       
-      bg.onload = ->
-        if ((new Date) - start) > 1000
-          $(bg).fadeIn(4000)
-        else
-          $(bg).fadeIn(250)
-      bg.src = 'http://lmn2.us.to:34243/bg.jpg'
+      # bg.onload = ->
+      #   if ((new Date) - start) > 1000
+      #     $(bg).fadeIn(4000)
+      #   else
+      #     $(bg).fadeIn(250)
+      # bg.src = 'http://lmn2.us.to:34243/bg.jpg'
