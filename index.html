@@ -15,6 +15,9 @@
 <style>
 html {
   background-color: #fff;
+  -webkit-perspective: 800px;
+  -moz-perspective: 800px;
+  perspective: 800px;
 }
 body {
   font-family: 'Open Sans';
@@ -23,6 +26,38 @@ body {
   min-width: 200pt;
   padding: 0 10pt;
   margin: 40pt auto;
+  -webkit-transform-style: preserve-3d;
+  -moz-transform: style preserve-3d;
+  transform-style: preserve-3d;
+  -webkit-transition: 150ms;
+  -moz-transition: 150ms;
+  transition: 150ms;
+}
+body._38 {
+  -webkit-transform: rotateX(10deg);
+  -moz-transform: rotateX(10deg);
+  transform: rotateX(10deg);
+}
+body._40 {
+  -webkit-transform: rotateX(-10deg);
+  -moz-transform: rotateX(-10deg);
+  transform: rotateX(-10deg);
+}
+body._37 {
+  -webkit-transform: rotateY(-10deg);
+  -moz-transform: rotateY(-10deg);
+  transform: rotateY(-10deg);
+}
+body._39 {
+  -webkit-transform: rotateY(10deg);
+  -moz-transform: rotateY(10deg);
+  transform: rotateY(10deg);
+}
+body._65,
+body._66 {
+  -webkit-transform: translateZ(-50px);
+  -moz-transform: translateZ(-50px);
+  transform: translateZ(-50px);
 }
 strong {
   font-weight: 700;
@@ -124,19 +159,28 @@ When the planets align, I make <a href="https://soundcloud.com/louroboros">chipt
       in ur codez
       */
 
-      var idx, seq;
+      var idx, imgidx, imgs, seq;
       seq = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65];
       idx = 0;
+      imgs = ['doritos.png', 'do.png', 'nam.png'];
+      imgidx = 0;
       return $(function() {
-        return $(window).on('keydown', function(event) {
+        $(window).on('keydown', function(event) {
+          var _ref;
+          if (_ref = event.which, __indexOf.call(seq, _ref) >= 0) {
+            $('body').addClass('_' + event.which);
+          }
           if (event.which !== seq[idx]) {
             idx = 0;
             return;
           }
           if (++idx === seq.length) {
-            $(window).off('keydown');
-            return $('header').css('background-image', 'url("doritos.png")');
+            $('header').css('background-image', 'url(' + imgs[imgidx++ % imgs.length] + ')');
+            return idx = 0;
           }
+        });
+        return $(window).on('keyup', function(event) {
+          return $('body').removeClass('_' + event.which);
         });
       });
     }).call(this);</script>

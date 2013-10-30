@@ -18,9 +18,29 @@ html ->
       header-height = 100pt
       header-padding-bottom = 27pt
       sidebar-width = 100pt
+      perspective()
+        -webkit-perspective arguments
+        -moz-perspective arguments
+        perspective arguments
+
+      transition()
+        -webkit-transition arguments
+        -moz-transition arguments
+        transition arguments
+
+      transform()
+        -webkit-transform arguments
+        -moz-transform arguments
+        transform arguments
+
+      transform-style()
+        -webkit-transform-style arguments
+        -moz-transform style arguments
+        transform-style arguments
 
       html
         background-color #fff
+        perspective 800px
 
       body
         font-family 'Open Sans'
@@ -29,7 +49,24 @@ html ->
         min-width 200pt
         padding 0 10pt
         margin 40pt auto
-      
+        transform-style preserve-3d
+        transition 150ms
+
+      body._38
+        transform rotateX(10deg)
+
+      body._40
+        transform rotateX(-10deg)
+
+      body._37
+        transform rotateY(-10deg)
+
+      body._39
+        transform rotateY(10deg)
+
+      body._65, body._66
+        transform translateZ(-50px)
+
       strong
         font-weight 700
 
@@ -136,11 +173,18 @@ html ->
       ###
       seq = [38,38,40,40,37,39,37,39,66,65]
       idx = 0
+      imgs = ['doritos.png','do.png','nam.png']
+      imgidx = 0
       $ ->
         $(window).on 'keydown', (event) ->
+          $('body').addClass('_' + event.which)  if event.which in seq
+
           if event.which isnt seq[idx]
             idx = 0
             return
           if ++idx is seq.length
-            $(window).off 'keydown'
-            $('header').css 'background-image', 'url("doritos.png")'
+            $('header').css 'background-image', 'url('+imgs[imgidx++%imgs.length]+')'
+            idx = 0
+
+        $(window).on 'keyup', (event) ->
+          $('body').removeClass '_' + event.which
