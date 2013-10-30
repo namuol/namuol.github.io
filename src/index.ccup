@@ -2,6 +2,13 @@ doctype 5
 html ->
   head ->
     meta charset:'utf-8'
+    meta property:'og:title', content:'<body> by Louis Acresti'
+    meta property:'og:type', content:'website'
+    meta property:'og:url', content:'http://namuol.github.io/'
+    meta property:'og:image', content:'http://namuol.github.io/nam.png'
+    meta property:'og:site_name', content:'<body> by Louis Acresti'
+    meta property:'og:description', content:'Personal site of web developer Louis Acresti'
+
     title '<body> by Louis Acresti'
     link href:'//netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.css', rel:'stylesheet', type:'text/css'
     link href:'//fonts.googleapis.com/css?family=Open+Sans:700italic,300,400,700', rel:'stylesheet', type:'text/css'
@@ -21,6 +28,9 @@ html ->
         min-width 200pt
         padding 0 10pt
         margin 40pt auto
+      
+      strong
+        font-weight 700
 
       code
         font-family 'Monaco'
@@ -91,7 +101,7 @@ html ->
     header ->
       text 'My name is <strong class="name">Louis Acresti</strong>.'
       br ''
-      text 'I\'m a <strong>web developer</strong> who likes making <strong>games</strong>.'
+      text 'I\'m a <strong>web developer</strong> who makes <strong>games</strong>.'
     
     section class:'sidebar', ->
       a href:'http://github.com/namuol', ->
@@ -108,7 +118,7 @@ html ->
       #   text 'Lately I\'ve been working on <a href="http://combojs.com"><strong>combo.js</strong></a> &mdash; a 2D game framework for JavaScripters.'
 
       section ->
-        text 'I made <a href="http://www.flog-game.com">FLOG</a>, and a few <a href="http://www.ludumdare.com/compo/author/namuol/">other small games</a>.'
+        text 'I made the puzzle-game, <a href="http://www.flog-game.com">FLOG</a>, and a few <a href="http://www.ludumdare.com/compo/author/namuol/">other small games</a>.'
 
       # section ->
       #   text 'I also made a simple <a href="http://namuol.github.io/banal-duck">&quot;brain-training&quot; app</a> for desktop browsers.'
