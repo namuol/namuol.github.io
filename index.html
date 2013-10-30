@@ -11,6 +11,7 @@
     <title><body> by Louis Acresti</title>
     <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.css" rel="stylesheet" type="text/css" />
     <link href="//fonts.googleapis.com/css?family=Open+Sans:700italic,300,400,700" rel="stylesheet" type="text/css" />
+    <script src="bower_components/zepto/zepto.min.js" type="text/javascript"></script>
 <style>
 html {
   background-color: #fff;
@@ -118,5 +119,26 @@ Sometimes I make browsers do <a href="http://namuol.github.io/earf-html5">silly 
       <section>
 When the planets align, I make <a href="https://soundcloud.com/louroboros">chiptunes</a>.      </section>
     </div>
+    <script>var __slice = Array.prototype.slice;var __hasProp = Object.prototype.hasOwnProperty;var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };var __extends = function(child, parent) {  for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; }  function ctor() { this.constructor = child; }  ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype;  return child; };var __indexOf = Array.prototype.indexOf || function(item) {  for (var i = 0, l = this.length; i < l; i++) {    if (this[i] === item) return i;  } return -1; };(function () {
+      /*
+      in ur codez
+      */
+
+      var idx, seq;
+      seq = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65];
+      idx = 0;
+      return $(function() {
+        return $(window).on('keydown', function(event) {
+          if (event.which !== seq[idx]) {
+            idx = 0;
+            return;
+          }
+          if (++idx === seq.length) {
+            $(window).off('keydown');
+            return $('header').css('background-image', 'url("doritos.png")');
+          }
+        });
+      });
+    }).call(this);</script>
   </body>
 </html>
