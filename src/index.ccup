@@ -82,7 +82,7 @@ html ->
         background-image url(nam.png)
         background-repeat no-repeat
         background-size auto header-height
-        margin-bottom 20pt
+        padding-bottom 20pt // use padding to prevent image being chopped during transform
 
       header > h1
         font-size 20pt
@@ -175,6 +175,12 @@ html ->
       idx = 0
       imgs = ['doritos.png','do.png','nam.png']
       imgidx = 0
+      
+      # "Preload" images
+      for url in imgs
+        el = $('<img>')
+        el.attr('src', url)
+
       $ ->
         $(window).on 'keydown', (event) ->
           $('body').addClass('_' + event.which)  if event.which in seq
