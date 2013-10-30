@@ -119,7 +119,7 @@ html ->
       #   text 'Lately I\'ve been working on <a href="http://combojs.com"><strong>combo.js</strong></a> &mdash; a 2D game framework for JavaScripters.'
 
       section ->
-        text 'I made the puzzle-game, <a href="http://www.flog-game.com">FLOG</a>, and a few <a href="http://www.ludumdare.com/compo/author/namuol/">other small games</a>.'
+        text 'I made the puzzle-game <a href="http://www.flog-game.com">FLOG</a>, and a few <a href="http://www.ludumdare.com/compo/author/namuol/">other small games</a>.'
 
       # section ->
       #   text 'I also made a simple <a href="http://namuol.github.io/banal-duck">&quot;brain-training&quot; app</a> for desktop browsers.'
