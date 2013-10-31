@@ -55,7 +55,6 @@ html class:'pre', ->
 
       html
         background-color #000
-        perspective 800px
 
       body
         background transparent
@@ -64,25 +63,29 @@ html class:'pre', ->
         max-width 460pt
         min-width 200pt
         padding 0 10pt
-        margin 40pt auto
+        margin 0 auto
+        transition 150ms
+        opacity 0
+        perspective 800px
+      
+      .contents
         transition 150ms
         transform-style preserve-3d
         backface-visibility hidden
-        opacity 0
 
-      body._38
+      .contents._38
         transform rotateX(10deg)
 
-      body._40
+      .contents._40
         transform rotateX(-10deg)
 
-      body._37
+      .contents._37
         transform rotateY(-10deg)
 
-      body._39
+      .contents._39
         transform rotateY(10deg)
 
-      body._65, body._66
+      .contents._65, .contents._66
         transform translateZ(-50px)
 
       strong
@@ -94,6 +97,7 @@ html class:'pre', ->
       header
         font-size 18pt
         font-weight 300
+        margin-top 40pt
         padding-top header-padding-bottom
         min-height header-height - header-padding-bottom
         padding-left sidebar-width + 20pt
@@ -147,6 +151,18 @@ html class:'pre', ->
 
       weak
         font-weight 300
+
+      .easter
+        text-align center
+        font-weight 700
+        position relative
+        height 0
+        overflow visible
+        top 0
+        left 0
+        width 100%
+        font-size 180%
+        text-shadow 1pt 1pt rgba(0,0,0,0.3)
     '''
 
     text '''
@@ -180,37 +196,41 @@ html class:'pre', ->
         setTimeout f, 3000
 
   body ->
-    header ->
-      img src:'nam.jpg'
-      text 'My name is <strong class="name">Louis Acresti</strong>.'
-      br ''
-      text 'I\'m a <strong>web developer</strong> who makes <strong>games</strong>.'
+    section class:'easter', ''
 
-    section class:'sidebar', ->
-      a href:'http://github.com/namuol', ->
-        i class:'fa fa-github'
-      text '&nbsp;'
-      a href:'http://twitter.com/louroboros', ->
-        i class:'fa fa-twitter'
-      text '&nbsp;'
-      a href:'mailto:louis.acresti@gmail.com', ->
-        i class:'fa fa-envelope'
+    div class:'contents', ->
+      header ->
+        img src:'nam.jpg'
+        text 'My name is <strong class="name">Louis Acresti</strong>.'
+        br ''
+        text 'I\'m a <strong>web developer</strong> who makes <strong>games</strong>.'
 
-    div class:'main', ->
-      # section ->
-      #   text 'Lately I\'ve been working on <a href="http://combojs.com"><strong>combo.js</strong></a> &mdash; a 2D game framework for JavaScripters.'
+      section class:'sidebar', ->
+        a href:'http://github.com/namuol', ->
+          i class:'fa fa-github'
+        text '&nbsp;'
+        a href:'http://twitter.com/louroboros', ->
+          i class:'fa fa-twitter'
+        text '&nbsp;'
+        a href:'mailto:louis.acresti@gmail.com', ->
+          i class:'fa fa-envelope'
 
-      section ->
-        text 'I made the puzzle-game <a href="http://www.flog-game.com">FLOG</a>, and a few <a href="http://www.ludumdare.com/compo/author/namuol/">other small games</a>.'
+      div class:'main', ->
+        # section ->
+        #   text 'Lately I\'ve been working on <a href="http://combojs.com"><strong>combo.js</strong></a> &mdash; a 2D game framework for JavaScripters.'
 
-      # section ->
-      #   text 'I also made a simple <a href="http://namuol.github.io/banal-duck">&quot;brain-training&quot; app</a> for desktop browsers.'
+        section ->
+          text 'I made the puzzle-game <a href="http://www.flog-game.com">FLOG</a>, and a few <a href="http://www.ludumdare.com/compo/author/namuol/">other small games</a>.'
 
-      section ->
-        text 'Sometimes I make browsers do <a href="http://namuol.github.io/earf-html5">silly things</a>.'
+        # section ->
+        #   text 'I also made a simple <a href="http://namuol.github.io/banal-duck">&quot;brain-training&quot; app</a> for desktop browsers.'
 
-      section ->
-        text 'When the planets align, I make <a href="https://soundcloud.com/louroboros">chiptunes</a>.'
+        section ->
+          text 'Sometimes I make browsers do <a href="http://namuol.github.io/earf-html5">silly things</a>.'
+
+        section ->
+          text 'When the planets align, I make <a href="https://soundcloud.com/louroboros">chiptunes</a>.'
+
 
     coffeescript ->
       ###
@@ -243,17 +263,35 @@ html class:'pre', ->
           setTimeout ->
             $(window).on 'keydown', (event) ->
               $('html').removeClass('pre').addClass 'transition'
-              $('body').addClass('_' + event.which)  if event.which in seq
+              $('.contents').addClass('_' + event.which)  if event.which in seq
 
               if event.which isnt seq[idx]
                 idx = 0
+                $('.easter').empty()
                 return
+
+              dir = switch event.which
+                when 38
+                  'up'
+                when 40
+                  'down'
+                when 37
+                  'left'
+                when 39
+                  'right'
+
+              if dir
+                $('.easter').append '<i class="fa fa-arrow-circle-'+dir+'">'
+              else
+                $('.easter').append if event.which is 66 then 'B' else 'A'
+
               if ++idx is seq.length
+                $('.easter').empty()
                 $('header > img').attr 'src', imgs[imgidx++%imgs.length]
                 idx = 0
 
             $(window).on 'keyup', (event) ->
-              $('body').removeClass '_' + event.which
+              $('.contents').removeClass '_' + event.which
           , 1000
 
         pre = ->

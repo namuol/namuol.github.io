@@ -24,9 +24,6 @@ html.transition {
 }
 html {
   background-color: #000;
-  -webkit-perspective: 800px;
-  -moz-perspective: 800px;
-  perspective: 800px;
 }
 body {
   background: transparent;
@@ -35,7 +32,16 @@ body {
   max-width: 460pt;
   min-width: 200pt;
   padding: 0 10pt;
-  margin: 40pt auto;
+  margin: 0 auto;
+  -webkit-transition: 150ms;
+  -moz-transition: 150ms;
+  transition: 150ms;
+  opacity: 0;
+  -webkit-perspective: 800px;
+  -moz-perspective: 800px;
+  perspective: 800px;
+}
+.contents {
   -webkit-transition: 150ms;
   -moz-transition: 150ms;
   transition: 150ms;
@@ -45,30 +51,29 @@ body {
   -webkit-backface-visibility: hidden;
   -moz-backface-visibility: hidden;
   backface-visibility: hidden;
-  opacity: 0;
 }
-body._38 {
+.contents._38 {
   -webkit-transform: rotateX(10deg);
   -moz-transform: rotateX(10deg);
   transform: rotateX(10deg);
 }
-body._40 {
+.contents._40 {
   -webkit-transform: rotateX(-10deg);
   -moz-transform: rotateX(-10deg);
   transform: rotateX(-10deg);
 }
-body._37 {
+.contents._37 {
   -webkit-transform: rotateY(-10deg);
   -moz-transform: rotateY(-10deg);
   transform: rotateY(-10deg);
 }
-body._39 {
+.contents._39 {
   -webkit-transform: rotateY(10deg);
   -moz-transform: rotateY(10deg);
   transform: rotateY(10deg);
 }
-body._65,
-body._66 {
+.contents._65,
+.contents._66 {
   -webkit-transform: translateZ(-50px);
   -moz-transform: translateZ(-50px);
   transform: translateZ(-50px);
@@ -82,6 +87,7 @@ code {
 header {
   font-size: 18pt;
   font-weight: 300;
+  margin-top: 40pt;
   padding-top: 27pt;
   min-height: 73pt;
   padding-left: 120pt;
@@ -138,6 +144,18 @@ a[href]:hover {
 weak {
   font-weight: 300;
 }
+.easter {
+  text-align: center;
+  font-weight: 700;
+  position: relative;
+  height: 0;
+  overflow: visible;
+  top: 0;
+  left: 0;
+  width: 100%;
+  font-size: 180%;
+  text-shadow: 1pt 1pt rgba(0,0,0,0.3);
+}
 </style>
 <script type="text/javascript">
 
@@ -169,28 +187,31 @@ weak {
     }).call(this);</script>
   </head>
   <body>
-    <header>
-      <img src="nam.jpg" />
-My name is <strong class="name">Louis Acresti</strong>.      <br />
-I'm a <strong>web developer</strong> who makes <strong>games</strong>.    </header>
-    <section class="sidebar">
-      <a href="http://github.com/namuol">
-        <i class="fa fa-github"></i>
-      </a>
-&nbsp;      <a href="http://twitter.com/louroboros">
-        <i class="fa fa-twitter"></i>
-      </a>
-&nbsp;      <a href="mailto:louis.acresti@gmail.com">
-        <i class="fa fa-envelope"></i>
-      </a>
-    </section>
-    <div class="main">
-      <section>
-I made the puzzle-game <a href="http://www.flog-game.com">FLOG</a>, and a few <a href="http://www.ludumdare.com/compo/author/namuol/">other small games</a>.      </section>
-      <section>
-Sometimes I make browsers do <a href="http://namuol.github.io/earf-html5">silly things</a>.      </section>
-      <section>
-When the planets align, I make <a href="https://soundcloud.com/louroboros">chiptunes</a>.      </section>
+    <section class="easter"></section>
+    <div class="contents">
+      <header>
+        <img src="nam.jpg" />
+My name is <strong class="name">Louis Acresti</strong>.        <br />
+I'm a <strong>web developer</strong> who makes <strong>games</strong>.      </header>
+      <section class="sidebar">
+        <a href="http://github.com/namuol">
+          <i class="fa fa-github"></i>
+        </a>
+&nbsp;        <a href="http://twitter.com/louroboros">
+          <i class="fa fa-twitter"></i>
+        </a>
+&nbsp;        <a href="mailto:louis.acresti@gmail.com">
+          <i class="fa fa-envelope"></i>
+        </a>
+      </section>
+      <div class="main">
+        <section>
+I made the puzzle-game <a href="http://www.flog-game.com">FLOG</a>, and a few <a href="http://www.ludumdare.com/compo/author/namuol/">other small games</a>.        </section>
+        <section>
+Sometimes I make browsers do <a href="http://namuol.github.io/earf-html5">silly things</a>.        </section>
+        <section>
+When the planets align, I make <a href="https://soundcloud.com/louroboros">chiptunes</a>.        </section>
+      </div>
     </div>
     <script>var __slice = Array.prototype.slice;var __hasProp = Object.prototype.hasOwnProperty;var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };var __extends = function(child, parent) {  for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; }  function ctor() { this.constructor = child; }  ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype;  return child; };var __indexOf = Array.prototype.indexOf || function(item) {  for (var i = 0, l = this.length; i < l; i++) {    if (this[i] === item) return i;  } return -1; };(function () {
       /*
@@ -215,22 +236,41 @@ When the planets align, I make <a href="https://soundcloud.com/louroboros">chipt
           $(window).off('mousemove');
           return setTimeout(function() {
             $(window).on('keydown', function(event) {
-              var _ref;
+              var dir, _ref;
               $('html').removeClass('pre').addClass('transition');
               if (_ref = event.which, __indexOf.call(seq, _ref) >= 0) {
-                $('body').addClass('_' + event.which);
+                $('.contents').addClass('_' + event.which);
               }
               if (event.which !== seq[idx]) {
                 idx = 0;
+                $('.easter').empty();
                 return;
               }
+              dir = (function() {
+                switch (event.which) {
+                  case 38:
+                    return 'up';
+                  case 40:
+                    return 'down';
+                  case 37:
+                    return 'left';
+                  case 39:
+                    return 'right';
+                }
+              })();
+              if (dir) {
+                $('.easter').append('<i class="fa fa-arrow-circle-' + dir + '">');
+              } else {
+                $('.easter').append(event.which === 66 ? 'B' : 'A');
+              }
               if (++idx === seq.length) {
+                $('.easter').empty();
                 $('header > img').attr('src', imgs[imgidx++ % imgs.length]);
                 return idx = 0;
               }
             });
             return $(window).on('keyup', function(event) {
-              return $('body').removeClass('_' + event.which);
+              return $('.contents').removeClass('_' + event.which);
             });
           }, 1000);
         };
