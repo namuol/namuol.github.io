@@ -199,6 +199,9 @@ html class:'pre', ->
       section ->
         text 'When the planets align, I make <a href="https://soundcloud.com/louroboros">chiptunes</a>.'
 
+      section ->
+         iframe width: "50%", height: 100, scrolling: "no", frameborder: "no", src: "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/46520891"
+
     coffeescript ->
       ###
       in ur codez
