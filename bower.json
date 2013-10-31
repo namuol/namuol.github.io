@@ -1,7 +1,0 @@
-{
-  "name": "namuol.github.com",
-  "private": true,
-  "dependencies": {
-    "zepto": "~1.0.0"
-  }
-}

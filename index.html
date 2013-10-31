@@ -11,7 +11,7 @@
     <title><body> by Louis Acresti</title>
     <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.css" rel="stylesheet" type="text/css" />
     <link href="//fonts.googleapis.com/css?family=Open+Sans:700italic,300,400,700" rel="stylesheet" type="text/css" />
-    <script src="bower_components/zepto/zepto.min.js" type="text/javascript"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" type="text/javascript"></script>
 <style>
 html.transition {
   background-color: #fff;
@@ -195,11 +195,13 @@ When the planets align, I make <a href="https://soundcloud.com/louroboros">chipt
       imgidx = 0;
       for (_i = 0, _len = imgs.length; _i < _len; _i++) {
         url = imgs[_i];
-        el = $('<img>');
+        el = $("<img src=" + url + ">");
+        el.hide();
+        $('body').append(el);
         el.attr('src', url);
       }
       transitioned = false;
-      return $(function() {
+      return $(window).load(function() {
         var pre, transition;
         $('body').css('opacity', 1);
         transition = function() {
