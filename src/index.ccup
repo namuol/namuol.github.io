@@ -1,5 +1,5 @@
 doctype 5
-html ->
+html class:'pre', ->
   head ->
     meta charset:'utf-8'
     meta property:'og:title', content:'<body> by Louis Acresti'
@@ -28,6 +28,11 @@ html ->
         -moz-transition arguments
         transition arguments
 
+      transition-delay()
+        -webkit-transition-delay arguments
+        -moz-transition-delay arguments
+        transition-delay arguments
+
       transform()
         -webkit-transform arguments
         -moz-transform arguments
@@ -38,19 +43,25 @@ html ->
         -moz-transform style arguments
         transform-style arguments
 
-      html
+      html.transition
         background-color #fff
+        transition 250ms
+        transition-delay 0ms
+
+      html
+        background-color #000
         perspective 800px
 
       body
+        background transparent
         font-family 'Open Sans'
         min-height 100pt
         max-width 600pt
         min-width 200pt
         padding 0 10pt
         margin 40pt auto
-        transform-style preserve-3d
         transition 150ms
+        transform-style preserve-3d
 
       body._38
         transform rotateX(10deg)
@@ -83,6 +94,10 @@ html ->
         background-repeat no-repeat
         background-size auto header-height
         padding-bottom 20pt // use padding to prevent image being chopped during transform
+        transition 500ms
+      
+      html.pre header
+        color white !important
 
       header > h1
         font-size 20pt
@@ -97,7 +112,7 @@ html ->
         text-decoration none
         font-weight 500
         color black
-        border-bottom: 1px solid #ccc
+        border-bottom 1px solid rgba(0,0,0,0.25)
 
       a[href]:hover
         color #479
@@ -140,7 +155,7 @@ html ->
       text 'My name is <strong class="name">Louis Acresti</strong>.'
       br ''
       text 'I\'m a <strong>web developer</strong> who makes <strong>games</strong>.'
-    
+
     section class:'sidebar', ->
       a href:'http://github.com/namuol', ->
         i class:'fa fa-github'
@@ -175,22 +190,39 @@ html ->
       idx = 0
       imgs = ['doritos.png','do.png','nam.png']
       imgidx = 0
-      
+
       # "Preload" images
       for url in imgs
         el = $('<img>')
         el.attr('src', url)
 
+      transitioned = false
+
       $ ->
-        $(window).on 'keydown', (event) ->
-          $('body').addClass('_' + event.which)  if event.which in seq
+        transition = ->
+          return  if transitioned
+          transitioned = true
 
-          if event.which isnt seq[idx]
-            idx = 0
-            return
-          if ++idx is seq.length
-            $('header').css 'background-image', 'url('+imgs[imgidx++%imgs.length]+')'
-            idx = 0
+          $('html').removeClass('pre').addClass 'transition'
+          $(window).off 'mousemove'
 
-        $(window).on 'keyup', (event) ->
-          $('body').removeClass '_' + event.which
+          setTimeout ->
+            $(window).on 'keydown', (event) ->
+              $('html').removeClass('pre').addClass 'transition'
+              $('body').addClass('_' + event.which)  if event.which in seq
+
+              if event.which isnt seq[idx]
+                idx = 0
+                return
+              if ++idx is seq.length
+                $('header').css 'background-image', 'url('+imgs[imgidx++%imgs.length]+')'
+                idx = 0
+
+            $(window).on 'keyup', (event) ->
+              $('body').removeClass '_' + event.which
+          , 1000
+
+        pre = ->
+          $(window).on 'mousemove', transition
+          setTimeout transition, 2000
+        setTimeout pre, 1000
