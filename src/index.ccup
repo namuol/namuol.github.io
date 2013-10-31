@@ -94,7 +94,7 @@ html class:'pre', ->
         background-repeat no-repeat
         background-size auto header-height
         padding-bottom 20pt // use padding to prevent image being chopped during transform
-        transition 500ms
+        transition color 500ms
       
       html.pre header
         color white !important
