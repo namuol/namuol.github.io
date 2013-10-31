@@ -1,0 +1,134 @@
+doctype 5
+html ->
+  head ->
+    meta charset:'utf-8'
+    meta property:'og:title', content:'<body> by Louis Acresti'
+    meta property:'og:type', content:'website'
+    meta property:'og:url', content:'http://namuol.github.io/'
+    meta property:'og:image', content:'http://namuol.github.io/nam.png'
+    meta property:'og:site_name', content:'<body> by Louis Acresti'
+    meta property:'og:description', content:'Personal site of web developer Louis Acresti'
+
+    title '<body> by Louis Acresti'
+    link href:'//netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.css', rel:'stylesheet', type:'text/css'
+    link href:'//fonts.googleapis.com/css?family=Open+Sans:700italic,300,400,700', rel:'stylesheet', type:'text/css'
+    script src:'bower_components/zepto/zepto.min.js', type:'text/javascript'
+
+    title 'Buy me a Beer'
+
+    stylus '''
+      html
+        background-color #fff
+
+      body
+        background transparent
+        font-family 'Open Sans', sans-serif
+        min-height 100pt
+        max-width 600pt
+        min-width 200pt
+        padding 0 10pt
+        margin 40pt auto
+
+      strong
+        font-weight 700
+
+      code
+        font-family 'Monaco'
+
+      section
+        margin-bottom 10pt
+
+      a[href]
+        text-decoration none
+        font-weight 500
+        color black
+        border-bottom 1px solid rgba(0,0,0,0.25)
+
+      a[href]:hover
+        color #479
+
+      weak
+        font-weight 300
+
+      .buy
+        height 32px
+        text-align center
+
+      .buy input[type=text]
+        float left
+        font-size 12pt
+        height 24px
+        margin-top 2px
+        width 50pt
+
+      .buy span
+        float left
+        display inline-block
+        height 32px
+
+      .buy .add-on.currency
+        margin-top 5px
+        margin-right 2pt
+        font-weight 300
+    '''
+    
+    text '''
+      <script type="text/javascript">
+
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-33247419-1']);
+        _gaq.push(['_trackPageview']);
+
+        (function() {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+
+      </script>
+    '''
+
+  body class:'beer', ->
+    div id:'content', ->
+      a href:'/', 'home'
+
+      section ->
+        p ->
+          text 'By clicking that button down there, you encourage me to make more nice things. You also pay my hosting bills and maybe even help put decent beer in my fridge.'
+          br ''
+          br ''
+          text 'It costs me about $0.001 of hosting fees each time someone plays <a href="http://www.flog-game.com">FLOG</a>, which means $1.00 covers 1000 plays.'
+          br ''
+          br ''
+          text 'Therefore I can keep the site ad-free as long as 1/1000 people drop a dollar or more into my digital hat.'
+          br ''
+          br ''
+          text 'Cheers!'
+          br ''
+          text '&nbsp;&nbsp;&nbsp;&nbsp;-Lou'
+
+        p ->
+          action1 = "https://checkout.google.com/api/checkout/v2/checkoutForm/Merchant/211159781209062"
+          action2 = "https://sandbox.google.com/checkout/api/checkout/v2/checkoutForm/Merchant/347935588011983"
+          form action:action1, id:"BB_BuyButtonForm", method:"post", name:"BB_BuyButtonForm", target:"_top", ->
+            text '''
+              <input name="item_name_1" type="hidden" value="Thank you for the nice thing(s)"/>
+              <input name="item_description_1" type="hidden" value=""/>
+              <input name="item_quantity_1" type="hidden" value="1"/>
+              <input name="item_currency_1" type="hidden" value="USD"/>
+              <input type="hidden"
+                name="shopping-cart.items.item-1.digital-content.display-disposition"
+                value="OPTIMISTIC"/>
+              <input type="hidden"
+                name="shopping-cart.items.item-1.digital-content.description"
+                value="<a href='http://namuol.github.com/thanks.html'>Thank You!</a>"/>
+              <input name="_charset_" type="hidden" value="utf-8"/>
+            '''
+            div class:'buy', ->
+              span class:'add-on currency', 'USD $'
+              input id:'buy-now-amt', name:'item_price_1', type:'text', value:'1.00'
+              span id:'buy-now-wrap', class:'add-on', ->
+                input
+                  type:'image'
+                  src:'https://checkout.google.com/buttons/buy.gif?merchant_id=347935588011983&amp;w=117&amp;h=48&amp;style=trans&amp;variant=text&amp;loc=en_US'
+                  alt:''
