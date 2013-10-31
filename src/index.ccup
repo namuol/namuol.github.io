@@ -287,7 +287,8 @@ html class:'pre', ->
 
               if ++idx is seq.length
                 $('.easter').empty()
-                $('header > img').attr 'src', imgs[imgidx++%imgs.length]
+                $('header > img').remove()
+                $('header').prepend "<img src='#{imgs[imgidx++%imgs.length]}'></img>"
                 idx = 0
 
             $(window).on 'keyup', (event) ->

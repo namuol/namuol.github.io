@@ -265,7 +265,8 @@ When the planets align, I make <a href="https://soundcloud.com/louroboros">chipt
               }
               if (++idx === seq.length) {
                 $('.easter').empty();
-                $('header > img').attr('src', imgs[imgidx++ % imgs.length]);
+                $('header > img').remove();
+                $('header').prepend("<img src='" + imgs[imgidx++ % imgs.length] + "'></img>");
                 return idx = 0;
               }
             });
