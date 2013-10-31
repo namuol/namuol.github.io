@@ -206,15 +206,15 @@ html class:'pre', ->
       ###
       seq = [38,38,40,40,37,39,37,39,66,65]
       idx = 0
-      imgs = ['doritos.png','do.png','nam.png']
+      imgs = ['doritos.png','do.png','nam.png','wat3.png','yes.png']
       imgidx = 0
 
       # "Preload" images
-      for url in imgs
-        el = $("<img src=#{url}>")
-        el.hide()
-        $('body').append el
-        el.attr('src', url)
+      # for url in imgs
+      #   el = $("<img src=#{url}>")
+      #   el.hide()
+      #   $('body').append el
+      #   el.attr('src', url)
 
       transitioned = false
 

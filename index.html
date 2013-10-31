@@ -188,18 +188,11 @@ When the planets align, I make <a href="https://soundcloud.com/louroboros">chipt
       in ur codez
       */
 
-      var el, idx, imgidx, imgs, seq, transitioned, url, _i, _len;
+      var idx, imgidx, imgs, seq, transitioned;
       seq = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65];
       idx = 0;
-      imgs = ['doritos.png', 'do.png', 'nam.png'];
+      imgs = ['doritos.png', 'do.png', 'nam.png', 'wat3.png', 'yes.png'];
       imgidx = 0;
-      for (_i = 0, _len = imgs.length; _i < _len; _i++) {
-        url = imgs[_i];
-        el = $("<img src=" + url + ">");
-        el.hide();
-        $('body').append(el);
-        el.attr('src', url);
-      }
       transitioned = false;
       return $(window).load(function() {
         var pre, transition;
