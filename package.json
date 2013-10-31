@@ -19,6 +19,10 @@
     "grunt-contrib-connect": "~0.5.0",
     "grunt-open": "~0.2.2"
   },
+    "scripts": {
+        "build": "grunt build",
+        "start": "grunt dev"
+    },
   "engines": {
     "node": ">=0.8.0",
     "npm": ">=1.2.10"
