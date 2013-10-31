@@ -5,7 +5,7 @@ html class:'pre', ->
     meta property:'og:title', content:'<body> by Louis Acresti'
     meta property:'og:type', content:'website'
     meta property:'og:url', content:'http://namuol.github.io/'
-    meta property:'og:image', content:'http://namuol.github.io/nam.png'
+    meta property:'og:image', content:'http://namuol.github.io/nam.jpg'
     meta property:'og:site_name', content:'<body> by Louis Acresti'
     meta property:'og:description', content:'Personal site of web developer Louis Acresti'
 
@@ -42,6 +42,11 @@ html class:'pre', ->
         -webkit-transform-style arguments
         -moz-transform style arguments
         transform-style arguments
+      
+      backface-visibility()
+        -webkit-backface-visibility arguments
+        -moz-backface-visibility arguments
+        backface-visibility arguments
 
       html.transition
         background-color #fff
@@ -56,12 +61,13 @@ html class:'pre', ->
         background transparent
         font-family 'Open Sans'
         min-height 100pt
-        max-width 600pt
+        max-width 460pt
         min-width 200pt
         padding 0 10pt
         margin 40pt auto
         transition 150ms
         transform-style preserve-3d
+        backface-visibility hidden
         opacity 0
 
       body._38
@@ -91,12 +97,17 @@ html class:'pre', ->
         padding-top header-padding-bottom
         min-height header-height - header-padding-bottom
         padding-left sidebar-width + 20pt
-        background-image url(nam.png)
-        background-repeat no-repeat
-        background-size auto header-height
         padding-bottom 20pt // use padding to prevent image being chopped during transform
         transition color 500ms
       
+      header > img
+        height 100pt
+        margin-left -120pt
+        margin-top -27pt
+        float left
+        border-radius 50%
+        background transparent
+
       html.pre header
         color white !important
 
@@ -170,6 +181,7 @@ html class:'pre', ->
 
   body ->
     header ->
+      img src:'nam.jpg'
       text 'My name is <strong class="name">Louis Acresti</strong>.'
       br ''
       text 'I\'m a <strong>web developer</strong> who makes <strong>games</strong>.'
@@ -206,7 +218,7 @@ html class:'pre', ->
       ###
       seq = [38,38,40,40,37,39,37,39,66,65]
       idx = 0
-      imgs = ['doritos.png','do.png','nam.png','wat3.png','yes.png']
+      imgs = ['doritos.jpg','do.jpg','nam.jpg','wat3.png','yes.png']
       imgidx = 0
 
       # "Preload" images
@@ -237,7 +249,7 @@ html class:'pre', ->
                 idx = 0
                 return
               if ++idx is seq.length
-                $('header').css 'background-image', 'url('+imgs[imgidx++%imgs.length]+')'
+                $('header > img').attr 'src', imgs[imgidx++%imgs.length]
                 idx = 0
 
             $(window).on 'keyup', (event) ->
