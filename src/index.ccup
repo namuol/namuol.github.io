@@ -13,6 +13,7 @@ html class:'pre', ->
     link href:'//netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.css', rel:'stylesheet', type:'text/css'
     link href:'//fonts.googleapis.com/css?family=Open+Sans:700italic,300,400,700', rel:'stylesheet', type:'text/css'
     script src:'//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js', type:'text/javascript'
+    script src:'/bower_components/cheet.js/cheet.min.js', type:'text/javascript'
 
     stylus '''
       header-height = 100pt
@@ -73,19 +74,19 @@ html class:'pre', ->
         transform-style preserve-3d
         backface-visibility hidden
 
-      .contents._38
+      .contents.keydown._38
         transform rotateX(10deg)
 
-      .contents._40
+      .contents.keydown._40
         transform rotateX(-10deg)
 
-      .contents._37
+      .contents.keydown._37
         transform rotateY(-10deg)
 
-      .contents._39
+      .contents.keydown._39
         transform rotateY(10deg)
 
-      .contents._65, .contents._66
+      .contents.keydown
         transform translateZ(-50px)
 
       strong
@@ -163,6 +164,9 @@ html class:'pre', ->
         width 100%
         font-size 180%
         text-shadow 1pt 1pt rgba(0,0,0,0.3)
+
+      img.iddqd
+        display none
     '''
 
     text '''
@@ -239,7 +243,9 @@ html class:'pre', ->
       seq = [38,38,40,40,37,39,37,39,66,65]
       idx = 0
       imgs = ['doritos.jpg','do.jpg','nam.jpg','wat3.png','yes.png']
-      imgidx = 0
+      iddqd_imgs = ['doritos_iddqd.png','do_iddqd.png','nam_iddqd.png','wat3_iddqd.png','yes_iddqd.png']
+      imgidx = 2
+      godmode = false
 
       # "Preload" images
       # for url in imgs
@@ -247,6 +253,14 @@ html class:'pre', ->
       #   el.hide()
       #   $('body').append el
       #   el.attr('src', url)
+
+      setImg = (idx) ->
+        $('header > img').remove()
+        $('header').prepend "<img src='#{imgs[idx%imgs.length]}'></img><img class='iddqd' src='#{iddqd_imgs[idx%imgs.length]}'></img>"
+        if godmode
+          $('.iddqd').show()
+        else
+          $('.iddqd').hide()
 
       transitioned = false
 
@@ -259,39 +273,36 @@ html class:'pre', ->
 
           $('html').removeClass('pre').addClass 'transition'
           $(window).off 'mousemove'
+          setImg imgidx
 
           setTimeout ->
+
+            cheet.done ->
+              $('.easter').empty()
+            
+            cheet.fail ->
+              $('.easter').empty()
+
+            cheet.next (str, key) ->
+              if key in ['up', 'down', 'left', 'right']
+                $('.easter').append '<i class="fa fa-arrow-circle-'+key+'">'
+              else
+                $('.easter').append key
+            
+            cheet 'up up down down left right left right b a', ->
+              setImg ++imgidx
+
+            cheet 'i d d q d', ->
+              godmode = !godmode
+              setImg imgidx
+
             $(window).on 'keydown', (event) ->
               $('html').removeClass('pre').addClass 'transition'
-              $('.contents').addClass('_' + event.which)  if event.which in seq
-
-              if event.which isnt seq[idx]
-                idx = 0
-                $('.easter').empty()
-                return
-
-              dir = switch event.which
-                when 38
-                  'up'
-                when 40
-                  'down'
-                when 37
-                  'left'
-                when 39
-                  'right'
-
-              if dir
-                $('.easter').append '<i class="fa fa-arrow-circle-'+dir+'">'
-              else
-                $('.easter').append if event.which is 66 then 'B' else 'A'
-
-              if ++idx is seq.length
-                $('.easter').empty()
-                $('header > img').remove()
-                $('header').prepend "<img src='#{imgs[imgidx++%imgs.length]}'></img>"
-                idx = 0
+              $('.contents').addClass 'keydown'
+              $('.contents').addClass '_' + event.which
 
             $(window).on 'keyup', (event) ->
+              $('.contents').removeClass 'keydown'
               $('.contents').removeClass '_' + event.which
           , 1000
 

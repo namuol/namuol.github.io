@@ -12,6 +12,7 @@
     <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.css" rel="stylesheet" type="text/css" />
     <link href="//fonts.googleapis.com/css?family=Open+Sans:700italic,300,400,700" rel="stylesheet" type="text/css" />
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" type="text/javascript"></script>
+    <script src="/bower_components/cheet.js/cheet.min.js" type="text/javascript"></script>
 <style>
 html.transition {
   background-color: #fff;
@@ -52,28 +53,27 @@ body {
   -moz-backface-visibility: hidden;
   backface-visibility: hidden;
 }
-.contents._38 {
+.contents.keydown._38 {
   -webkit-transform: rotateX(10deg);
   -moz-transform: rotateX(10deg);
   transform: rotateX(10deg);
 }
-.contents._40 {
+.contents.keydown._40 {
   -webkit-transform: rotateX(-10deg);
   -moz-transform: rotateX(-10deg);
   transform: rotateX(-10deg);
 }
-.contents._37 {
+.contents.keydown._37 {
   -webkit-transform: rotateY(-10deg);
   -moz-transform: rotateY(-10deg);
   transform: rotateY(-10deg);
 }
-.contents._39 {
+.contents.keydown._39 {
   -webkit-transform: rotateY(10deg);
   -moz-transform: rotateY(10deg);
   transform: rotateY(10deg);
 }
-.contents._65,
-.contents._66 {
+.contents.keydown {
   -webkit-transform: translateZ(-50px);
   -moz-transform: translateZ(-50px);
   transform: translateZ(-50px);
@@ -156,6 +156,9 @@ weak {
   font-size: 180%;
   text-shadow: 1pt 1pt rgba(0,0,0,0.3);
 }
+img.iddqd {
+  display: none;
+}
 </style>
 <script type="text/javascript">
 
@@ -218,11 +221,22 @@ When the planets align, I make <a href="https://soundcloud.com/louroboros">chipt
       in ur codez
       */
 
-      var idx, imgidx, imgs, seq, transitioned;
+      var godmode, iddqd_imgs, idx, imgidx, imgs, seq, setImg, transitioned;
       seq = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65];
       idx = 0;
       imgs = ['doritos.jpg', 'do.jpg', 'nam.jpg', 'wat3.png', 'yes.png'];
-      imgidx = 0;
+      iddqd_imgs = ['doritos_iddqd.png', 'do_iddqd.png', 'nam_iddqd.png', 'wat3_iddqd.png', 'yes_iddqd.png'];
+      imgidx = 2;
+      godmode = false;
+      setImg = function(idx) {
+        $('header > img').remove();
+        $('header').prepend("<img src='" + imgs[idx % imgs.length] + "'></img><img class='iddqd' src='" + iddqd_imgs[idx % imgs.length] + "'></img>");
+        if (godmode) {
+          return $('.iddqd').show();
+        } else {
+          return $('.iddqd').hide();
+        }
+      };
       transitioned = false;
       return $(window).load(function() {
         var pre, transition;
@@ -234,43 +248,35 @@ When the planets align, I make <a href="https://soundcloud.com/louroboros">chipt
           transitioned = true;
           $('html').removeClass('pre').addClass('transition');
           $(window).off('mousemove');
+          setImg(imgidx);
           return setTimeout(function() {
-            $(window).on('keydown', function(event) {
-              var dir, _ref;
-              $('html').removeClass('pre').addClass('transition');
-              if (_ref = event.which, __indexOf.call(seq, _ref) >= 0) {
-                $('.contents').addClass('_' + event.which);
-              }
-              if (event.which !== seq[idx]) {
-                idx = 0;
-                $('.easter').empty();
-                return;
-              }
-              dir = (function() {
-                switch (event.which) {
-                  case 38:
-                    return 'up';
-                  case 40:
-                    return 'down';
-                  case 37:
-                    return 'left';
-                  case 39:
-                    return 'right';
-                }
-              })();
-              if (dir) {
-                $('.easter').append('<i class="fa fa-arrow-circle-' + dir + '">');
+            cheet.done(function() {
+              return $('.easter').empty();
+            });
+            cheet.fail(function() {
+              return $('.easter').empty();
+            });
+            cheet.next(function(str, key) {
+              if (key === 'up' || key === 'down' || key === 'left' || key === 'right') {
+                return $('.easter').append('<i class="fa fa-arrow-circle-' + key + '">');
               } else {
-                $('.easter').append(event.which === 66 ? 'B' : 'A');
-              }
-              if (++idx === seq.length) {
-                $('.easter').empty();
-                $('header > img').remove();
-                $('header').prepend("<img src='" + imgs[imgidx++ % imgs.length] + "'></img>");
-                return idx = 0;
+                return $('.easter').append(key);
               }
             });
+            cheet('up up down down left right left right b a', function() {
+              return setImg(++imgidx);
+            });
+            cheet('i d d q d', function() {
+              godmode = !godmode;
+              return setImg(imgidx);
+            });
+            $(window).on('keydown', function(event) {
+              $('html').removeClass('pre').addClass('transition');
+              $('.contents').addClass('keydown');
+              return $('.contents').addClass('_' + event.which);
+            });
             return $(window).on('keyup', function(event) {
+              $('.contents').removeClass('keydown');
               return $('.contents').removeClass('_' + event.which);
             });
           }, 1000);
