@@ -58,19 +58,22 @@ html class:'pre', ->
         background-color #000
 
       body
+        min-height 100pt
         background transparent
         font-family 'Open Sans'
-        min-height 100pt
-        max-width 460pt
-        min-width 200pt
-        padding 0 10pt
-        margin 0 auto
         transition 150ms
         opacity 0
         perspective 800px
-      
+        margin 0
+        padding 0
+
       .contents
         transition 150ms
+        max-width 460pt
+        min-width 200pt
+        padding 0 10pt
+        padding-top 40pt
+        margin 0 auto
         transform-style preserve-3d
         backface-visibility hidden
 
@@ -98,7 +101,6 @@ html class:'pre', ->
       header
         font-size 18pt
         font-weight 300
-        margin-top 40pt
         padding-top header-padding-bottom
         min-height header-height - header-padding-bottom
         padding-left sidebar-width + 20pt
@@ -156,7 +158,7 @@ html class:'pre', ->
       .easter
         text-align center
         font-weight 700
-        position relative
+        position fixed
         height 0
         overflow visible
         top 0
@@ -164,6 +166,15 @@ html class:'pre', ->
         width 100%
         font-size 180%
         text-shadow 1pt 1pt rgba(0,0,0,0.3)
+      
+      .doomtext
+        position fixed
+        left 0
+        top 0
+        height 10pt
+
+      .doomtext img
+        height 100%
 
       img.iddqd
         display none
@@ -200,7 +211,8 @@ html class:'pre', ->
         setTimeout f, 3000
 
   body ->
-    section class:'easter', ''
+    div class:'doomtext', ''
+    div class:'easter', ''
 
     div class:'contents', ->
       header ->
@@ -263,6 +275,11 @@ html class:'pre', ->
           $('.iddqd').hide()
 
       transitioned = false
+      if Audio
+        doom = new Audio 'dsswtchn.wav'
+      else
+        doom =
+          play: ->
 
       $(window).load ->
         $('body').css 'opacity', 1
@@ -276,7 +293,6 @@ html class:'pre', ->
           setImg imgidx
 
           setTimeout ->
-
             cheet.done ->
               $('.easter').empty()
             
@@ -294,7 +310,17 @@ html class:'pre', ->
 
             cheet 'i d d q d', ->
               godmode = !godmode
+              onoff = if godmode then 'on' else 'off'
+              img = $("<img src='iddqd_#{onoff}.png'></img>")
+              setTimeout (-> img.remove()), 3000
+              $('.doomtext').empty().append(img)
+
               setImg imgidx
+              try
+                doom.volume = 0.5
+                doom.play()
+              catch e
+                console.warn 'aw, couldnt play sound'
 
             $(window).on 'keydown', (event) ->
               $('html').removeClass('pre').addClass 'transition'

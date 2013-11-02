@@ -27,13 +27,9 @@ html {
   background-color: #000;
 }
 body {
+  min-height: 100pt;
   background: transparent;
   font-family: 'Open Sans';
-  min-height: 100pt;
-  max-width: 460pt;
-  min-width: 200pt;
-  padding: 0 10pt;
-  margin: 0 auto;
   -webkit-transition: 150ms;
   -moz-transition: 150ms;
   transition: 150ms;
@@ -41,11 +37,18 @@ body {
   -webkit-perspective: 800px;
   -moz-perspective: 800px;
   perspective: 800px;
+  margin: 0;
+  padding: 0;
 }
 .contents {
   -webkit-transition: 150ms;
   -moz-transition: 150ms;
   transition: 150ms;
+  max-width: 460pt;
+  min-width: 200pt;
+  padding: 0 10pt;
+  padding-top: 40pt;
+  margin: 0 auto;
   -webkit-transform-style: preserve-3d;
   -moz-transform: style preserve-3d;
   transform-style: preserve-3d;
@@ -87,7 +90,6 @@ code {
 header {
   font-size: 18pt;
   font-weight: 300;
-  margin-top: 40pt;
   padding-top: 27pt;
   min-height: 73pt;
   padding-left: 120pt;
@@ -147,7 +149,7 @@ weak {
 .easter {
   text-align: center;
   font-weight: 700;
-  position: relative;
+  position: fixed;
   height: 0;
   overflow: visible;
   top: 0;
@@ -155,6 +157,15 @@ weak {
   width: 100%;
   font-size: 180%;
   text-shadow: 1pt 1pt rgba(0,0,0,0.3);
+}
+.doomtext {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 10pt;
+}
+.doomtext img {
+  height: 100%;
 }
 img.iddqd {
   display: none;
@@ -190,7 +201,8 @@ img.iddqd {
     }).call(this);</script>
   </head>
   <body>
-    <section class="easter"></section>
+    <div class="doomtext"></div>
+    <div class="easter"></div>
     <div class="contents">
       <header>
         <img src="nam.jpg" />
@@ -221,7 +233,7 @@ When the planets align, I make <a href="https://soundcloud.com/louroboros">chipt
       in ur codez
       */
 
-      var godmode, iddqd_imgs, idx, imgidx, imgs, seq, setImg, transitioned;
+      var doom, godmode, iddqd_imgs, idx, imgidx, imgs, seq, setImg, transitioned;
       seq = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65];
       idx = 0;
       imgs = ['doritos.jpg', 'do.jpg', 'nam.jpg', 'wat3.png', 'yes.png'];
@@ -238,6 +250,13 @@ When the planets align, I make <a href="https://soundcloud.com/louroboros">chipt
         }
       };
       transitioned = false;
+      if (Audio) {
+        doom = new Audio('dsswtchn.wav');
+      } else {
+        doom = {
+          play: function() {}
+        };
+      }
       return $(window).load(function() {
         var pre, transition;
         $('body').css('opacity', 1);
@@ -267,8 +286,22 @@ When the planets align, I make <a href="https://soundcloud.com/louroboros">chipt
               return setImg(++imgidx);
             });
             cheet('i d d q d', function() {
+              var e, img, onoff;
               godmode = !godmode;
-              return setImg(imgidx);
+              onoff = godmode ? 'on' : 'off';
+              img = $("<img src='iddqd_" + onoff + ".png'></img>");
+              setTimeout((function() {
+                return img.remove();
+              }), 3000);
+              $('.doomtext').empty().append(img);
+              setImg(imgidx);
+              try {
+                doom.volume = 0.5;
+                return doom.play();
+              } catch (_error) {
+                e = _error;
+                return console.warn('aw, couldnt play sound');
+              }
             });
             $(window).on('keydown', function(event) {
               $('html').removeClass('pre').addClass('transition');
