@@ -242,7 +242,7 @@ html class:'pre', ->
         #   text 'I also made a simple <a href="http://namuol.github.io/banal-duck">&quot;brain-training&quot; app</a> for desktop browsers.'
 
         section ->
-          text 'Sometimes I make browsers do <a href="http://namuol.github.io/earf-html5">silly things</a>.'
+          text 'Sometimes I make browsers do <a href="http://namuol.github.io/earf-html5">silly</a> <a href="http://namuol.github.io/cheet.js">things</a>.'
 
         section ->
           text 'When the planets align, I make <a href="https://soundcloud.com/louroboros">chiptunes</a>.'
