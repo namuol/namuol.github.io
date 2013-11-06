@@ -1,6 +1,6 @@
 {
   "name": "cheet.js",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "main": "cheet.min.js",
   "ignore": [
     "bower.json",
@@ -10,13 +10,13 @@
     "cheet.js"
   ],
   "homepage": "https://github.com/namuol/cheet.js",
-  "_release": "0.2.0",
+  "_release": "0.2.1",
   "_resolution": {
     "type": "version",
-    "tag": "0.2.0",
-    "commit": "94c7434bf4e8ba3b181625a6d4a9c19f653f67f4"
+    "tag": "0.2.1",
+    "commit": "7784bcf763dac8ff9c4538b7fe021f9acfe0f6f5"
   },
   "_source": "git://github.com/namuol/cheet.js.git",
-  "_target": "~0.2.0",
+  "_target": "0.2.1",
   "_originalSource": "cheet.js"
 }
