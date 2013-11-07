@@ -444,6 +444,11 @@ When the planets align, I make <a href="https://soundcloud.com/louroboros">chipt
       return $(window).load(function() {
         var pre, transition;
         $('body').css('opacity', 1);
+        $('.google > div').mousedown(function() {
+          return $(this).data({
+            d: 0
+          });
+        });
         transition = function() {
           if (transitioned) {
             return;

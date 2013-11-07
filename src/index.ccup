@@ -454,6 +454,8 @@ html class:'pre', ->
 
       $(window).load ->
         $('body').css 'opacity', 1
+        
+        $('.google > div').mousedown -> $(@).data d: 0
 
         transition = ->
           return  if transitioned
