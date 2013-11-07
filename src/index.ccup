@@ -455,8 +455,18 @@ html class:'pre', ->
       $(window).load ->
         $('body').css 'opacity', 1
         
-        $('.google > div').mousedown -> $(@).data d: 0
+        $('.google > div').mousedown -> $(@).data d:0
 
+        blink = ->
+          setTimeout ->
+            $('.google > div').each (i) ->
+              setTimeout =>
+                $(@).data d:0
+              , 25 * i
+          , Math.random() * 8000
+
+        blink()
+        
         transition = ->
           return  if transitioned
           transitioned = true
