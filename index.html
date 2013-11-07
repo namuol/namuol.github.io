@@ -206,17 +206,17 @@ img.iddqd {
     <div class="contents">
       <header>
         <img src="nam.jpg" />
-My name is <strong class="name">Louis Acresti</strong>.        <br />
-I'm a <strong>web developer</strong> who makes <strong>games</strong>.      </header>
+My name is <strong class="name" title="you can call me Lou">Louis Acresti</strong>.        <br />
+I'm a <strong title="mostly CoffeeScript; you've been warned.">web developer</strong> who makes <strong title="but mostly game frameworks">games</strong>.      </header>
       <section class="sidebar">
         <a href="http://github.com/namuol">
-          <i class="fa fa-github"></i>
+          <i class="fa fa-github" title="geeking"></i>
         </a>
 &nbsp;        <a href="http://twitter.com/louroboros">
-          <i class="fa fa-twitter"></i>
+          <i class="fa fa-twitter" title="socializing"></i>
         </a>
 &nbsp;        <a href="mailto:louis.acresti@gmail.com">
-          <i class="fa fa-envelope"></i>
+          <i class="fa fa-envelope" title="business/spam"></i>
         </a>
       </section>
       <div class="main">
@@ -242,7 +242,7 @@ When the planets align, I make <a href="https://soundcloud.com/louroboros">chipt
       godmode = false;
       setImg = function(idx) {
         $('header > img').remove();
-        $('header').prepend("<img src='" + imgs[idx % imgs.length] + "'></img><img class='iddqd' src='" + iddqd_imgs[idx % imgs.length] + "'></img>");
+        $('header').prepend("<img title='mandatory face-in-circle image' src='" + imgs[idx % imgs.length] + "'></img><img class='iddqd' src='" + iddqd_imgs[idx % imgs.length] + "'></img>");
         if (godmode) {
           return $('.iddqd').show();
         } else {
