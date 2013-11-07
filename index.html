@@ -362,7 +362,7 @@ When the planets align, I make <a href="https://soundcloud.com/louroboros">chipt
           dv = (_ref4 = g.data('dv')) != null ? _ref4 : 0;
           td = (_ref5 = g.data('td')) != null ? _ref5 : 0;
           tdv = td - d;
-          dv += (tdv - dv) * 0.08;
+          dv += (tdv - dv) * 0.2;
           d += dv;
           x = (_ref6 = g.data('x')) != null ? _ref6 : 0;
           xv = (_ref7 = g.data('xv')) != null ? _ref7 : 0;
@@ -378,6 +378,9 @@ When the planets align, I make <a href="https://soundcloud.com/louroboros">chipt
           tyv = ty - y;
           yv += (tyv - yv) * 1;
           y += yv;
+          if (!((Math.abs(dv) > 0.01) || (Math.abs(xv) > 0.01) || (Math.abs(yv) > 0.01) || (Math.abs(angv) > 0.1))) {
+            return;
+          }
           g.parent().css({
             width: d + '%',
             height: d + '%',
@@ -422,7 +425,7 @@ When the planets align, I make <a href="https://soundcloud.com/louroboros">chipt
                 tx: x * 100,
                 ty: y * 100
               });
-            }, Math.random() * 250);
+            }, 50 * i);
           }
         });
         window.cancelAnimationFrame(googleAnim);

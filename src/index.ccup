@@ -380,7 +380,7 @@ html class:'pre', ->
           dv = g.data('dv') ? 0
           td = g.data('td') ? 0
           tdv = td - d
-          dv += (tdv - dv) * 0.08
+          dv += (tdv - dv) * 0.2
           d += dv
 
           x = g.data('x') ? 0
@@ -398,6 +398,8 @@ html class:'pre', ->
           tyv = ty - y
           yv += (tyv - yv) * 1
           y += yv
+
+          return  unless (Math.abs(dv) > 0.01) or (Math.abs(xv) > 0.01) or (Math.abs(yv) > 0.01) or (Math.abs(angv) > 0.1)
 
           g.parent().css
             width: d + '%'
@@ -438,7 +440,7 @@ html class:'pre', ->
                 td: d * 100
                 tx: x * 100
                 ty: y * 100
-            , Math.random() * 250
+            , 50 * i
 
         window.cancelAnimationFrame googleAnim
         animateGoogles()  if googling
