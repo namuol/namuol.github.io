@@ -141,9 +141,6 @@ img.iddqd {
   position: absolute;
   float: left;
   z-index: 10;
-  -webkit-transition: 250ms;
-  -moz-transition: 250ms;
-  transition: 250ms;
 }
 .google div {
   -webkit-backface-visibility: hidden;
@@ -347,7 +344,8 @@ When the planets align, I make <a href="https://soundcloud.com/louroboros">chipt
       animateGoogles = function() {
         googleAnim = window.requestAnimationFrame(animateGoogles);
         return $('.google > div').each(function(i) {
-          var ang, angv, g, tang, tangv, _ref, _ref1, _ref2;
+          var ang, angv, d, dv, g, tang, tangv, td, tdv, tx, txv, ty, tyv, w, x, xv, y, yv, _ref, _ref1, _ref10, _ref11, _ref2, _ref3, _ref4, _ref5, _ref6, _ref7, _ref8, _ref9;
+          w = googles[imgidx][i][2] / googles[imgidx][2];
           g = $(this);
           ang = (_ref = g.data('ang')) != null ? _ref : 0;
           angv = (_ref1 = g.data('angv')) != null ? _ref1 : 0;
@@ -359,11 +357,44 @@ When the planets align, I make <a href="https://soundcloud.com/louroboros">chipt
             transform: "rotate(" + (ang + Math.PI / 2) + "rad)"
           });
           g.data('ang', ang);
-          return g.data('angv', angv);
+          g.data('angv', angv);
+          d = (_ref3 = g.data('d')) != null ? _ref3 : 0;
+          dv = (_ref4 = g.data('dv')) != null ? _ref4 : 0;
+          td = (_ref5 = g.data('td')) != null ? _ref5 : 0;
+          tdv = td - d;
+          dv += (tdv - dv) * 0.08;
+          d += dv;
+          x = (_ref6 = g.data('x')) != null ? _ref6 : 0;
+          xv = (_ref7 = g.data('xv')) != null ? _ref7 : 0;
+          tx = (_ref8 = g.data('tx')) != null ? _ref8 : 0;
+          tx -= d / 2;
+          txv = tx - x;
+          xv += (txv - xv) * 1;
+          x += xv;
+          y = (_ref9 = g.data('y')) != null ? _ref9 : 0;
+          yv = (_ref10 = g.data('yv')) != null ? _ref10 : 0;
+          ty = (_ref11 = g.data('ty')) != null ? _ref11 : 0;
+          ty -= d / 2;
+          tyv = ty - y;
+          yv += (tyv - yv) * 1;
+          y += yv;
+          g.parent().css({
+            width: d + '%',
+            height: d + '%',
+            left: x + '%',
+            top: y + '%'
+          });
+          return g.data({
+            d: d,
+            dv: dv,
+            x: x,
+            xv: xv,
+            y: y,
+            yv: yv
+          });
         });
       };
       setImg = function(idx) {
-        idx = idx % imgs.length;
         $('header > div > img').remove();
         $('header > div').prepend("<img title='mandatory face-in-circle image' src='" + imgs[idx] + "'></img><img class='iddqd' src='" + iddqd_imgs[idx] + "'></img>");
         if (godmode) {
@@ -371,28 +402,32 @@ When the planets align, I make <a href="https://soundcloud.com/louroboros">chipt
         } else {
           $('.iddqd').hide();
         }
-        $('.google').each(function(i) {
-          var d, g, img, left, top, width;
-          img = $('header > div > img').first()[0];
-          g = googles[idx][i];
-          d = googles[idx][2];
-          left = (g[0] - (g[2] / 2)) / d;
-          top = (g[1] - (g[2] / 2)) / d;
-          width = g[2] / d;
-          console.log("left: " + left + ", top: " + top + ", width: " + width);
-          return $(this).css({
-            width: width * 100 + '%',
-            height: width * 100 + '%',
-            left: left * 100 + '%',
-            top: top * 100 + '%'
-          });
+        $('.google > div').each(function(i) {
+          var _this = this;
+          $(this).parent().hide();
+          if (googling) {
+            return setTimeout(function() {
+              var d, g, img, w, x, y;
+              $(_this).parent().show();
+              img = $('header > div > img').first()[0];
+              g = googles[idx][i];
+              w = googles[idx][2];
+              x = g[0] / w;
+              y = g[1] / w;
+              d = g[2] / w;
+              console.log("x: " + x + ", y: " + y + ", d: " + d);
+              return $(_this).data({
+                d: 0,
+                td: d * 100,
+                tx: x * 100,
+                ty: y * 100
+              });
+            }, Math.random() * 250);
+          }
         });
         window.cancelAnimationFrame(googleAnim);
         if (googling) {
-          $('.google').show();
           return animateGoogles();
-        } else {
-          return $('.google').hide();
         }
       };
       transitioned = false;
@@ -429,7 +464,8 @@ When the planets align, I make <a href="https://soundcloud.com/louroboros">chipt
               }
             });
             cheet('up up down down left right left right b a', function() {
-              return setImg(++imgidx);
+              imgidx = (imgidx + 1) % imgs.length;
+              return setImg(imgidx);
             });
             cheet('i d d q d', function() {
               var e, img, onoff;

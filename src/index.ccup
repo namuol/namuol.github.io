@@ -154,11 +154,9 @@ html class:'pre', ->
         position absolute
         float left
         z-index 10
-        transition 250ms
 
       .google div
         backface-visibility hidden
-        //transition 100ms
         box-sizing border-box
         width 100%
         height 100%
@@ -365,6 +363,8 @@ html class:'pre', ->
       animateGoogles = ->
         googleAnim = window.requestAnimationFrame animateGoogles
         $('.google > div').each (i) ->
+          w = googles[imgidx][i][2]/googles[imgidx][2]
+
           g = $(@)
           ang = g.data('ang') ? 0
           angv = g.data('angv') ? 0
@@ -376,8 +376,44 @@ html class:'pre', ->
           g.data 'ang', ang
           g.data 'angv', angv
 
+          d = g.data('d') ? 0
+          dv = g.data('dv') ? 0
+          td = g.data('td') ? 0
+          tdv = td - d
+          dv += (tdv - dv) * 0.08
+          d += dv
+
+          x = g.data('x') ? 0
+          xv = g.data('xv') ? 0
+          tx = g.data('tx') ? 0
+          tx -= d/2
+          txv = tx - x
+          xv += (txv - xv) * 1
+          x += xv
+
+          y = g.data('y') ? 0
+          yv = g.data('yv') ? 0
+          ty = g.data('ty') ? 0
+          ty -= d/2
+          tyv = ty - y
+          yv += (tyv - yv) * 1
+          y += yv
+
+          g.parent().css
+            width: d + '%'
+            height: d + '%'
+            left: x + '%'
+            top: y + '%'
+
+          g.data
+            d: d
+            dv: dv
+            x: x
+            xv: xv
+            y: y
+            yv: yv
+
       setImg = (idx) ->
-        idx = idx % imgs.length
         $('header > div > img').remove()
         $('header > div').prepend "<img title='mandatory face-in-circle image' src='#{imgs[idx]}'></img><img class='iddqd' src='#{iddqd_imgs[idx]}'></img>"
         if godmode
@@ -385,26 +421,27 @@ html class:'pre', ->
         else
           $('.iddqd').hide()
 
-        $('.google').each (i) ->
-          img = $('header > div > img').first()[0]
-          g = googles[idx][i]
-          d = googles[idx][2]
-          left  = (g[0] - (g[2] / 2)) / d
-          top   = (g[1] - (g[2] / 2)) / d
-          width = g[2] / d
-          console.log "left: #{left}, top: #{top}, width: #{width}"
-          $(@).css
-            width: width * 100 + '%'
-            height: width * 100 + '%'
-            left: left * 100 + '%'
-            top: top * 100 + '%'
+        $('.google > div').each (i) ->
+          $(@).parent().hide()
+          if googling
+            setTimeout =>
+              $(@).parent().show()
+              img = $('header > div > img').first()[0]
+              g = googles[idx][i]
+              w = googles[idx][2]
+              x = g[0] / w
+              y = g[1] / w
+              d = g[2] / w
+              console.log "x: #{x}, y: #{y}, d: #{d}"
+              $(@).data
+                d: 0
+                td: d * 100
+                tx: x * 100
+                ty: y * 100
+            , Math.random() * 250
 
         window.cancelAnimationFrame googleAnim
-        if googling 
-          $('.google').show()
-          animateGoogles()
-        else
-          $('.google').hide()
+        animateGoogles()  if googling
 
       transitioned = false
       if Audio
@@ -438,7 +475,8 @@ html class:'pre', ->
                 $('.easter').append key
             
             cheet 'up up down down left right left right b a', ->
-              setImg ++imgidx
+              imgidx = (imgidx + 1) % imgs.length
+              setImg imgidx
 
             cheet 'i d d q d', ->
               godmode = !godmode
