@@ -442,13 +442,26 @@ When the planets align, I make <a href="https://soundcloud.com/louroboros">chipt
         };
       }
       return $(window).load(function() {
-        var pre, transition;
+        var blink, pre, transition;
         $('body').css('opacity', 1);
         $('.google > div').mousedown(function() {
           return $(this).data({
             d: 0
           });
         });
+        blink = function() {
+          $('.google > div').each(function(i) {
+            var _this = this;
+            $(this).hide();
+            return setTimeout(function() {
+              return $(_this).show();
+            }, 50);
+          });
+          return setTimeout(function() {
+            return blink();
+          }, Math.random() * 12000);
+        };
+        blink();
         transition = function() {
           if (transitioned) {
             return;
