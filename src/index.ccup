@@ -154,6 +154,7 @@ html class:'pre', ->
         position absolute
         float left
         z-index 10
+        transition 250ms
 
       .google div
         backface-visibility hidden
@@ -374,7 +375,7 @@ html class:'pre', ->
           g.css transform: "rotate(#{ang + Math.PI/2}rad)"
           g.data 'ang', ang
           g.data 'angv', angv
-          
+
       setImg = (idx) ->
         idx = idx % imgs.length
         $('header > div > img').remove()
@@ -398,12 +399,12 @@ html class:'pre', ->
             left: left * 100 + '%'
             top: top * 100 + '%'
 
+        window.cancelAnimationFrame googleAnim
         if googling 
           $('.google').show()
           animateGoogles()
         else
           $('.google').hide()
-          window.cancelAnimationFrame googleAnim
 
       transitioned = false
       if Audio

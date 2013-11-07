@@ -141,6 +141,9 @@ img.iddqd {
   position: absolute;
   float: left;
   z-index: 10;
+  -webkit-transition: 250ms;
+  -moz-transition: 250ms;
+  transition: 250ms;
 }
 .google div {
   -webkit-backface-visibility: hidden;
@@ -384,12 +387,12 @@ When the planets align, I make <a href="https://soundcloud.com/louroboros">chipt
             top: top * 100 + '%'
           });
         });
+        window.cancelAnimationFrame(googleAnim);
         if (googling) {
           $('.google').show();
           return animateGoogles();
         } else {
-          $('.google').hide();
-          return window.cancelAnimationFrame(googleAnim);
+          return $('.google').hide();
         }
       };
       transitioned = false;
