@@ -520,12 +520,18 @@ When the planets align, I make <a href="https://soundcloud.com/louroboros">chipt
               return setImg(imgidx);
             });
             $(window).on('mousemove', function(e) {
+              var nah;
+              nah = false;
               return $('.google > div').each(function(i) {
                 var dx, dy, g, tang;
+                if (nah) {
+                  return;
+                }
                 g = $(this);
                 dx = e.pageX - g.offset().left - g.width() / 2;
                 dy = e.pageY - g.offset().top - g.height() / 2;
-                if (Math.sqrt(dx * dx + dy * dy) > 150) {
+                if (i === 0 && Math.sqrt(dx * dx + dy * dy) > 250) {
+                  nah = true;
                   return;
                 }
                 tang = Math.atan2(dy, dx);
