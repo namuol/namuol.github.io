@@ -37,7 +37,7 @@ module.exports = (grunt) ->
           livereload: true
 
     open:
-      dev:
+      hack:
         path: "http://127.0.0.1:#{cfg.serverPort}/"
 
   grunt.initConfig config
@@ -48,4 +48,4 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-open'
 
   grunt.registerTask 'default', ['coffeecup']
-  grunt.registerTask 'dev', ['connect:server', 'open:dev', 'watch']
+  grunt.registerTask 'hack', ['connect:server', 'open:hack', 'watch']

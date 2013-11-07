@@ -48,7 +48,16 @@ html class:'pre', ->
         -webkit-backface-visibility arguments
         -moz-backface-visibility arguments
         backface-visibility arguments
+      
+      box-sizing()
+        -webkit-box-sizing arguments
+        -moz-box-sizing arguments
+        box-sizing arguments
 
+      box-shadow()
+        -webkit-box-shadow arguments
+        box-shadow arguments
+      
       html.transition
         background-color #fff
         transition 250ms
@@ -106,20 +115,69 @@ html class:'pre', ->
         padding-left sidebar-width + 20pt
         padding-bottom 20pt // use padding to prevent image being chopped during transform
         transition color 500ms
-      
-      header > img
+        position relative
+
+      header > div
+        width 100pt
         height 100pt
         margin-left -120pt
         margin-top -27pt
+        position absolute
         float left
+
+      header img
         border-radius 50%
         background transparent
+        width 100%
+        height 100%
+        position absolute
+        top 0
+        left 0
 
-      html.pre header
-        color white !important
+      header p
+        margin 0
 
       header > h1
         font-size 20pt
+
+      img.iddqd
+        display none
+      
+      .google
+        backface-visibility hidden
+        display none
+        width 24pt
+        height 24pt
+        box-shadow 2pt 2pt 2pt rgba(0,0,0,0.7)
+        box-sizing border-box
+        border-radius 50%
+        position absolute
+        float left
+        z-index 10
+
+      .google div
+        backface-visibility hidden
+        //transition 100ms
+        box-sizing border-box
+        width 100%
+        height 100%
+        position relative
+        border-radius 50%
+
+      .google > div
+        padding 0.5pt
+        z-index 11
+        background white
+
+      .google > div > div
+        width 50%
+        height 50%
+        z-index 12
+        margin auto
+        background black
+
+      html.pre header
+        color white !important
 
       div.main
         padding-left sidebar-width + 20pt
@@ -175,9 +233,6 @@ html class:'pre', ->
 
       .doomtext img
         height 100%
-
-      img.iddqd
-        display none
     '''
 
     text '''
@@ -216,10 +271,18 @@ html class:'pre', ->
 
     div class:'contents', ->
       header ->
-        img src:'nam.jpg'
-        text 'My name is <strong class="name" title="you can call me Lou">Louis Acresti</strong>.'
-        br ''
-        text 'I\'m a <strong title="mostly CoffeeScript; you\'ve been warned.">web developer</strong> who makes <strong title="but mostly game frameworks">games</strong>.'
+        div ->
+          img src:'nam.jpg', ->
+          div class:'google', -> # Shadow
+            div -> # Eyeball
+              div -> # Pupil
+          div class:'google', -> # Shadow
+            div -> # Eyeball
+              div -> # Pupil
+        p ->
+          text 'My name is <strong class="name" title="you can call me Lou">Louis Acresti</strong>.'
+          br ''
+          text 'I\'m a <strong title="mostly CoffeeScript; you\'ve been warned.">web developer</strong> who makes <strong title="but mostly game frameworks">games</strong>.'
 
       section class:'sidebar', ->
         a href:'http://github.com/namuol', ->
@@ -247,8 +310,29 @@ html class:'pre', ->
         section ->
           text 'When the planets align, I make <a href="https://soundcloud.com/louroboros">chiptunes</a>.'
 
-
     coffeescript ->
+      do ->
+        lastTime = 0
+        vendors = ["webkit", "moz"]
+        x = 0
+
+        while x < vendors.length and not window.requestAnimationFrame
+          window.requestAnimationFrame = window[vendors[x] + "RequestAnimationFrame"]
+          window.cancelAnimationFrame = window[vendors[x] + "CancelAnimationFrame"] or window[vendors[x] + "CancelRequestAnimationFrame"]
+          ++x
+        unless window.requestAnimationFrame
+          window.requestAnimationFrame = (callback, element) ->
+            currTime = new Date().getTime()
+            timeToCall = Math.max(0, 16 - (currTime - lastTime))
+            id = window.setTimeout(->
+              callback currTime + timeToCall
+            , timeToCall)
+            lastTime = currTime + timeToCall
+            id
+        unless window.cancelAnimationFrame
+          window.cancelAnimationFrame = (id) ->
+            clearTimeout id
+
       ###
       in ur codez
       ###
@@ -256,8 +340,19 @@ html class:'pre', ->
       idx = 0
       imgs = ['doritos.jpg','do.jpg','nam.jpg','wat3.png','yes.png']
       iddqd_imgs = ['doritos_iddqd.png','do_iddqd.png','nam_iddqd.png','wat3_iddqd.png','yes_iddqd.png']
+      
+      googles = [
+        [[187,137,40], [229,130,32], 295],
+        [[113,117,38], [184,116,34], 300],
+        [[157,182,60], [259,182,60], 409],
+        [[134,172,48], [228,152,52], 400],
+        [[97,119,100], [298,76,112], 396]
+      ]
+
       imgidx = 2
       godmode = false
+      googling = false
+      googleAnim = null
 
       # "Preload" images
       # for url in imgs
@@ -265,14 +360,50 @@ html class:'pre', ->
       #   el.hide()
       #   $('body').append el
       #   el.attr('src', url)
-
+            
+      animateGoogles = ->
+        googleAnim = window.requestAnimationFrame animateGoogles
+        $('.google > div').each (i) ->
+          g = $(@)
+          ang = g.data('ang') ? 0
+          angv = g.data('angv') ? 0
+          tang = g.data('tang') ? 0
+          tangv = tang - ang
+          angv += (tangv - angv) * 0.08
+          ang += angv
+          g.css transform: "rotate(#{ang + Math.PI/2}rad)"
+          g.data 'ang', ang
+          g.data 'angv', angv
+          
       setImg = (idx) ->
-        $('header > img').remove()
-        $('header').prepend "<img title='mandatory face-in-circle image' src='#{imgs[idx%imgs.length]}'></img><img class='iddqd' src='#{iddqd_imgs[idx%imgs.length]}'></img>"
+        idx = idx % imgs.length
+        $('header > div > img').remove()
+        $('header > div').prepend "<img title='mandatory face-in-circle image' src='#{imgs[idx]}'></img><img class='iddqd' src='#{iddqd_imgs[idx]}'></img>"
         if godmode
           $('.iddqd').show()
         else
           $('.iddqd').hide()
+
+        $('.google').each (i) ->
+          img = $('header > div > img').first()[0]
+          g = googles[idx][i]
+          d = googles[idx][2]
+          left  = (g[0] - (g[2] / 2)) / d
+          top   = (g[1] - (g[2] / 2)) / d
+          width = g[2] / d
+          console.log "left: #{left}, top: #{top}, width: #{width}"
+          $(@).css
+            width: width * 100 + '%'
+            height: width * 100 + '%'
+            left: left * 100 + '%'
+            top: top * 100 + '%'
+
+        if googling 
+          $('.google').show()
+          animateGoogles()
+        else
+          $('.google').hide()
+          window.cancelAnimationFrame googleAnim
 
       transitioned = false
       if Audio
@@ -314,13 +445,28 @@ html class:'pre', ->
               img = $("<img src='iddqd_#{onoff}.png'></img>")
               setTimeout (-> img.remove()), 3000
               $('.doomtext').empty().append(img)
-
+              if godmode
+                googling = false
               setImg imgidx
               try
                 doom.volume = 0.5
                 doom.play()
               catch e
                 console.warn 'aw, couldnt play sound'
+
+            cheet 'g o o g l e', ->
+              googling = !googling
+              if googling
+                godmode = false
+              setImg imgidx
+
+            $(window).on 'mousemove', (e) ->
+              $('.google > div').each (i) ->
+                g = $(@)
+                dx = e.pageX - g.offset().left - g.width()/2
+                dy = e.pageY - g.offset().top - g.height()/2
+                tang = Math.atan2 dy, dx
+                g.data 'tang', tang
 
             $(window).on 'keydown', (event) ->
               $('html').removeClass('pre').addClass 'transition'
