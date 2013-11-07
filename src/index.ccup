@@ -460,6 +460,7 @@ html class:'pre', ->
         blink = ->
           $('.google > div').each (i) ->
             $(@).hide()
+            $(@).data tang: Math.PI * 2 * Math.random()
             setTimeout =>
               $(@).show()
             , 50
@@ -520,6 +521,7 @@ html class:'pre', ->
                 g = $(@)
                 dx = e.pageX - g.offset().left - g.width()/2
                 dy = e.pageY - g.offset().top - g.height()/2
+                return  if Math.sqrt(dx*dx + dy*dy) > 150
                 tang = Math.atan2 dy, dx
                 g.data 'tang', tang
 
