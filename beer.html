@@ -48,7 +48,8 @@ weak {
   font-weight: 300;
 }
 .buy {
-  height: 32px;
+  padding-top: 50px;
+  padding-bottom: 50px;
   text-align: center;
 }
 .buy input[type=text] {
@@ -67,6 +68,35 @@ weak {
   margin-top: 5px;
   margin-right: 2pt;
   font-weight: 300;
+}
+.buy a {
+  text-decoration: none;
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+.buy button {
+  box-sizing: border-box;
+  border: 0;
+  padding: 6px 15px;
+  border-radius: 3px;
+  background-color: #55c43f;
+  border-bottom: 5px solid #44b32e;
+  color: #fff;
+  font-weight: 900;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 20pt;
+  text-shadow: 0 2px 0 rgba(0,0,0,0.15);
+  outline: none;
+}
+.buy button:hover {
+  cursor: pointer;
+  background-color: #66d550;
+  border-bottom: 5px solid #55c43f;
+}
+.buy button:active {
+  margin-top: 5px;
+  border-bottom: 2px solid #55c43f;
 }
 </style>
 <script type="text/javascript">
@@ -87,7 +117,14 @@ weak {
       <a href="/">home</a>
       <section>
         <p>
-By clicking that button down there, you encourage me to make more nice things. You also pay my hosting bills and maybe even help put decent beer in my fridge.          <br />
+          <div class="buy">
+            <a href="https://spacebox.io/s/Bti5V1MBkw" class="-sbe-button">
+              <button>$ • Say Thanks</button>
+            </a>
+          </div>
+        </p>
+        <p>
+By clicking that button up there, you encourage me to make more nice things. You also pay my hosting bills and maybe even help put decent beer in my fridge.          <br />
           <br />
 It costs me about $0.001 of hosting fees each time someone plays <a href="http://www.flog-game.com">FLOG</a>, which means $1.00 covers 1000 plays.          <br />
           <br />
@@ -95,28 +132,8 @@ Therefore I can keep the site ad-free as long as 1/1000 people drop a dollar or 
           <br />
 Cheers!          <br />
 &nbsp;&nbsp;&nbsp;&nbsp;-Lou        </p>
-        <p>
-          <form action="https://checkout.google.com/api/checkout/v2/checkoutForm/Merchant/211159781209062" id="BB_BuyButtonForm" method="post" name="BB_BuyButtonForm" target="_top">
-<input name="item_name_1" type="hidden" value="Thank you for the nice thing(s)"/>
-<input name="item_description_1" type="hidden" value=""/>
-<input name="item_quantity_1" type="hidden" value="1"/>
-<input name="item_currency_1" type="hidden" value="USD"/>
-<input type="hidden"
-  name="shopping-cart.items.item-1.digital-content.display-disposition"
-  value="OPTIMISTIC"/>
-<input type="hidden"
-  name="shopping-cart.items.item-1.digital-content.description"
-  value="<a href='http://namuol.github.com/thanks.html'>Thank You!</a>"/>
-<input name="_charset_" type="hidden" value="utf-8"/>            <div class="buy">
-              <span class="add-on currency">USD $</span>
-              <input id="buy-now-amt" name="item_price_1" type="text" value="1.00" />
-              <span id="buy-now-wrap" class="add-on">
-                <input type="image" src="https://checkout.google.com/buttons/buy.gif?merchant_id=347935588011983&amp;w=117&amp;h=48&amp;style=trans&amp;variant=text&amp;loc=en_US" alt="" />
-              </span>
-            </div>
-          </form>
-        </p>
       </section>
     </div>
+    <script type="text/javascript" src="https://spacebox.io/embed/js/embed-v1.js"></script>
   </body>
 </html>
