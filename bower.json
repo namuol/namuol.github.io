@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.1.2",
   "dependencies": {
-    "cheet.js": "0.2.2"
+    "cheet.js": "0.2.2",
+    "zepto": "~1.0.0"
   }
 }

@@ -17,6 +17,50 @@ html ->
     title 'Buy me a Beer'
 
     stylus '''
+      perspective()
+        -webkit-perspective arguments
+        -moz-perspective arguments
+        perspective arguments
+
+      transition()
+        -webkit-transition arguments
+        -moz-transition arguments
+        transition arguments
+
+      transition-delay()
+        -webkit-transition-delay arguments
+        -moz-transition-delay arguments
+        transition-delay arguments
+
+      transform()
+        -webkit-transform arguments
+        -moz-transform arguments
+        transform arguments
+
+      transform-style()
+        -webkit-transform-style arguments
+        -moz-transform style arguments
+        transform-style arguments
+      
+      transform-origin()
+        -webkit-transform-origin arguments
+        -moz-transform origin arguments
+        transform-origin arguments
+
+      backface-visibility()
+        -webkit-backface-visibility arguments
+        -moz-backface-visibility arguments
+        backface-visibility arguments
+      
+      box-sizing()
+        -webkit-box-sizing arguments
+        -moz-box-sizing arguments
+        box-sizing arguments
+
+      box-shadow()
+        -webkit-box-shadow arguments
+        box-shadow arguments
+      
       html
         background-color #fff
 
@@ -91,7 +135,7 @@ html ->
         font-size 20pt
         text-shadow 0 2px 0 rgba(0,0,0,0.15)
         outline none
-
+        perspective 100px
         &:hover
           cursor pointer
           background-color #55C43F + #111111
@@ -100,6 +144,128 @@ html ->
         &:active
           margin-top 5px
           border-bottom 2px solid #55c43F - #111111 + #111111
+
+        .letter
+          display block
+          transform-origin 50% 60%
+          height 36px
+
+        .s0
+          transform translateZ(0px)
+        .s1
+          transform translateZ(1px)
+        .s2
+          transform translateZ(2px)
+        .s3
+          transform translateZ(3px)
+        .s4
+          transform translateZ(4px)
+        .s5
+          transform translateZ(5px)
+        .s6
+          transform translateZ(6px)
+        .s7
+          transform translateZ(7px)
+        .s8
+          transform translateZ(8px)
+        .s9
+          transform translateZ(9px)
+        .s10
+          transform translateZ(10px)
+        .s11
+          transform translateZ(11px)
+        .s12
+          transform translateZ(12px)
+        .s13
+          transform translateZ(13px)
+        .s14
+          transform translateZ(14px)
+        .s15
+          transform translateZ(15px)
+        .s16
+          transform translateZ(16px)
+        .s17
+          transform translateZ(17px)
+        .s18
+          transform translateZ(18px)
+        .s19
+          transform translateZ(19px)
+        .s20
+          transform translateZ(20px)
+        .s21
+          transform translateZ(21px)
+        .s22
+          transform translateZ(22px)
+        .s23
+          transform translateZ(23px)
+        .s24
+          transform translateZ(24px)
+        .s25
+          transform translateZ(25px)
+        .s26
+          transform translateZ(26px)
+        .s27
+          transform translateZ(27px)
+        .s28
+          transform translateZ(28px)
+        .s29
+          transform translateZ(29px)
+        .s30
+          transform translateZ(28px)
+        .s31
+          transform translateZ(27px)
+        .s32
+          transform translateZ(26px)
+        .s33
+          transform translateZ(25px)
+        .s34
+          transform translateZ(24px)
+        .s35
+          transform translateZ(23px)
+        .s36
+          transform translateZ(22px)
+        .s37
+          transform translateZ(21px)
+        .s38
+          transform translateZ(20px)
+        .s39
+          transform translateZ(19px)
+        .s40
+          transform translateZ(18px)
+        .s41
+          transform translateZ(17px)
+        .s42
+          transform translateZ(16px)
+        .s43
+          transform translateZ(15px)
+        .s44
+          transform translateZ(14px)
+        .s45
+          transform translateZ(13px)
+        .s46
+          transform translateZ(12px)
+        .s47
+          transform translateZ(11px)
+        .s48
+          transform translateZ(10px)
+        .s49
+          transform translateZ(9px)
+        .s50
+          transform translateZ(8px)
+        .s51
+          transform translateZ(7px)
+        .s52
+          transform translateZ(6px)
+        .s53
+          transform translateZ(5px)
+        .s54
+          transform translateZ(4px)
+        .s55
+          transform translateZ(3px)
+        .s56
+          transform translateZ(2px)
+        .s57
+          transform translateZ(1px)
     '''
     
     text '''
@@ -141,5 +307,73 @@ html ->
           br ''
           text '&nbsp;&nbsp;&nbsp;&nbsp;-Lou'
 
+    coffeescript ->
+      colors = [
+        '#ff0000'
+        '#ff3000'
+        '#ff5f00'
+        '#ff9000'
+        '#ffbf00'
+        '#fff000'
+        '#dfff00'
+        '#aeff00'
+        '#7fff00'
+        '#4fff00'
+        '#1fff00'
+        '#00ff11'
+        '#00ff41'
+        '#00ff72'
+        '#00ffa1'
+        '#00ffd1'
+        '#00fdff'
+        '#00cdff'
+        '#009dff'
+        '#006dff'
+        '#003dff'
+        '#000dff'
+        '#2300ff'
+        '#5300ff'
+        '#8300ff'
+        '#b200ff'
+        '#e200ff'
+        '#ff00eb'
+        '#ff00bb'
+        '#ff008c'
+        '#ff005b'
+        '#ff002c'
+      ]
+
+      $ ->
+        button = $('.buy button')
+        text = button.text()
+        button.html('')
+        for letter in text
+          if letter is ' '
+            letter = '&nbsp;'
+          button.append '<span class="letter">'+letter+'</span>'
+        interval = 0
+        offset = 0
+        colorz = ->
+          chillin = button.children()
+          i = chillin.length
+          for child in chillin
+            $(child).css 'color', colors[(offset+i)%colors.length]
+            $(child).css '-webkit-transform', "translateZ(#{20*Math.sin((offset+i)*0.1)}px)"
+            $(child).css '-moz-transform', "translateZ(#{20*Math.sin((offset+i)*0.1)}px)"
+            $(child).css 'transform', "translateZ(#{20*Math.sin((offset+i)*0.1)}px)"
+            # $(child).removeClass 's'+((offset+i-1)%57)
+            # $(child).addClass 's'+((offset+i)%57)
+            --i
+          ++offset
+          interval = requestAnimationFrame colorz
+        button.mouseover ->
+          colorz()
+
+        button.mouseout ->
+          cancelAnimationFrame interval
+          button.children().css 'color', 'inherit'
+          button.children().css '-webkit-transform', "translateZ(0px)"
+          button.children().css '-moz-transform', "translateZ(0px)"
+          button.children().css 'transform', "translateZ(0px)"
 
     script type:'text/javascript', src:'https://spacebox.io/embed/js/embed-v1.js'
