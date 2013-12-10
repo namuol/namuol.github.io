@@ -2,6 +2,10 @@ doctype 5
 html class:'pre', ->
   head ->
     meta charset:'utf-8'
+    meta name:'viewport', content:'width=device-width, initial-scale=1, maximum-scale=1'
+    meta name:'apple-mobile-web-app-capable', content:'yes'
+    meta name:'apple-mobile-web-app-status-bar-style', content:'black-translucent'
+
     meta property:'og:title', content:'<body> by Louis Acresti'
     meta property:'og:type', content:'website'
     meta property:'og:url', content:'http://namuol.github.io/'
@@ -116,6 +120,9 @@ html class:'pre', ->
         padding-bottom 20pt // use padding to prevent image being chopped during transform
         transition color 500ms
         position relative
+        
+        br.devs
+          display none
 
       header > div
         width 100pt
@@ -176,7 +183,7 @@ html class:'pre', ->
         background black
 
       html.pre header
-        color white !important
+        color white
 
       div.main
         padding-left sidebar-width + 20pt
@@ -232,6 +239,67 @@ html class:'pre', ->
 
       .doomtext img
         height 100%
+
+      @media only screen and (max-width: 600px)
+        html
+          background white !important
+          color black !important
+        
+        .contents
+          padding-top 20pt
+
+        header
+          color black !important
+          br.devs
+            display inherit
+
+      @media only screen and (max-width: 480px)
+        html
+          background white !important
+          color black !important
+
+        .contents
+          padding-top 10pt
+          text-align center
+          
+        header
+          padding 0
+          font-size 16pt
+          text-align left
+          margin-bottom 10pt
+          text-align center
+          color black !important
+
+          br.devs
+            display inherit
+
+          > div
+            position inherit
+            margin 0
+            height inherit
+            width 50%
+            margin auto
+            float none
+            margin-bottom 10pt
+
+            img
+              position inherit
+              height inherit
+              margin auto
+          
+          > .name
+            box-sizing border-box
+            display block
+            width 100%
+            font-size 16pt
+            margin-bottom 5pt
+        
+        div.main
+          padding 15pt
+          text-align left
+
+        .sidebar
+          display none
     '''
 
     text '''
@@ -278,10 +346,13 @@ html class:'pre', ->
           div class:'google', -> # Shadow
             div -> # Eyeball
               div -> # Pupil
+        
+        p class:'name', ->
+          text '<span class="mynameis">My name is</span> <span class="louis"><strong class="name" title="you can call me Lou">Louis Acresti</strong>.</span>'
         p ->
-          text 'My name is <strong class="name" title="you can call me Lou">Louis Acresti</strong>.'
-          br ''
-          text 'I\'m a <strong title="mostly CoffeeScript; you\'ve been warned.">web developer</strong> who makes <strong title="but mostly game frameworks">games</strong>.'
+          text '<span class="webdev">I\'m a <strong title="mostly CoffeeScript; you\'ve been warned.">web developer</strong></span> '
+          br class:'devs'
+          text '<span class="gamedev">who makes <strong title="but mostly game frameworks">games</strong>.</span>'
 
       section class:'sidebar', ->
         a href:'http://github.com/namuol', ->
@@ -445,30 +516,77 @@ html class:'pre', ->
         window.cancelAnimationFrame googleAnim
         animateGoogles()  if googling
 
+      cheet.done ->
+        $('.easter').empty()
+      
+      cheet.fail ->
+        $('.easter').empty()
+
+      cheet.next (str, key) ->
+        if key in ['up', 'down', 'left', 'right']
+          $('.easter').append '<i class="fa fa-arrow-circle-'+key+'">'
+        else
+          $('.easter').append key
+      
+      cheet 'up up down down left right left right b a', ->
+        imgidx = (imgidx + 1) % imgs.length
+        setImg imgidx
+
+      cheet 'i d d q d', ->
+        godmode = !godmode
+        onoff = if godmode then 'on' else 'off'
+        img = $("<img src='iddqd_#{onoff}.png'></img>")
+        setTimeout (-> img.remove()), 3000
+        $('.doomtext').empty().append(img)
+        if godmode
+          googling = false
+        setImg imgidx
+        try
+          doom.volume = 0.5
+          doom.play()
+        catch e
+          console.warn 'aw, couldnt play sound'
+
+      cheet 'g o o g l e', ->
+        googling = !googling
+        if googling
+          godmode = false
+        setImg imgidx
+
+      blink = ->
+        $('.google > div').each (i) ->
+          $(@).hide()
+          $(@).data tang: Math.PI * 2 * Math.random()
+          setTimeout =>
+            $(@).show()
+          , 50
+        setTimeout ->
+          blink()
+        , Math.random() * 12000
+
+      blink()
+
       transitioned = false
+
       if Audio
         doom = new Audio 'dsswtchn.wav'
       else
         doom =
           play: ->
+      
+      $(window).on 'keydown', (event) ->
+        $('html').removeClass('pre').addClass 'transition'
+        $('.contents').addClass 'keydown'
+        $('.contents').addClass '_' + event.which
+
+      $(window).on 'keyup', (event) ->
+        $('.contents').removeClass 'keydown'
+        $('.contents').removeClass '_' + event.which
 
       $(window).load ->
         $('body').css 'opacity', 1
         
         $('.google > div').mousedown -> $(@).data d:0
-
-        blink = ->
-          $('.google > div').each (i) ->
-            $(@).hide()
-            $(@).data tang: Math.PI * 2 * Math.random()
-            setTimeout =>
-              $(@).show()
-            , 50
-          setTimeout ->
-            blink()
-          , Math.random() * 12000
-
-        blink()
 
         transition = ->
           return  if transitioned
@@ -476,45 +594,9 @@ html class:'pre', ->
 
           $('html').removeClass('pre').addClass 'transition'
           $(window).off 'mousemove'
-          setImg imgidx
+          # setImg imgidx
 
           setTimeout ->
-            cheet.done ->
-              $('.easter').empty()
-            
-            cheet.fail ->
-              $('.easter').empty()
-
-            cheet.next (str, key) ->
-              if key in ['up', 'down', 'left', 'right']
-                $('.easter').append '<i class="fa fa-arrow-circle-'+key+'">'
-              else
-                $('.easter').append key
-            
-            cheet 'up up down down left right left right b a', ->
-              imgidx = (imgidx + 1) % imgs.length
-              setImg imgidx
-
-            cheet 'i d d q d', ->
-              godmode = !godmode
-              onoff = if godmode then 'on' else 'off'
-              img = $("<img src='iddqd_#{onoff}.png'></img>")
-              setTimeout (-> img.remove()), 3000
-              $('.doomtext').empty().append(img)
-              if godmode
-                googling = false
-              setImg imgidx
-              try
-                doom.volume = 0.5
-                doom.play()
-              catch e
-                console.warn 'aw, couldnt play sound'
-
-            cheet 'g o o g l e', ->
-              googling = !googling
-              if googling
-                godmode = false
-              setImg imgidx
 
             $(window).on 'mousemove', (e) ->
               nah = false
@@ -528,15 +610,6 @@ html class:'pre', ->
                   return
                 tang = Math.atan2 dy, dx
                 g.data 'tang', tang
-
-            $(window).on 'keydown', (event) ->
-              $('html').removeClass('pre').addClass 'transition'
-              $('.contents').addClass 'keydown'
-              $('.contents').addClass '_' + event.which
-
-            $(window).on 'keyup', (event) ->
-              $('.contents').removeClass 'keydown'
-              $('.contents').removeClass '_' + event.which
           , 1000
 
         pre = ->
