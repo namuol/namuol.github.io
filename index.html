@@ -576,6 +576,9 @@ When the planets align, I make <a href="https://soundcloud.com/louroboros">chipt
           play: function() {}
         };
       }
+      $(window).on('focus', function() {
+        return $('.contents').removeClass('keydown');
+      });
       $(window).on('keydown', function(event) {
         $('html').removeClass('pre').addClass('transition');
         $('.contents').addClass('keydown');

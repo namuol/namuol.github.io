@@ -574,6 +574,10 @@ html class:'pre', ->
         doom =
           play: ->
       
+      # Prevent stuck keydown:
+      $(window).on 'focus', ->
+        $('.contents').removeClass 'keydown'
+
       $(window).on 'keydown', (event) ->
         $('html').removeClass('pre').addClass 'transition'
         $('.contents').addClass 'keydown'
