@@ -148,6 +148,7 @@ html class:'pre', ->
         font-size 20pt
 
       img.iddqd
+        position absolute
         display none
       
       .google
