@@ -291,7 +291,7 @@ html ->
       section ->
         p ->
           div class:'buy', ->
-            a href:'https://plasso.co/louis.acresti@gmail.com', class:'plo-button', ->
+            a href:'https://spacebox.io/s/Bti5V1MBkw', class:'plo-button', ->
               button '$ • Say Thanks'
         p ->
           text 'By clicking that button up there, you encourage me to make more nice things. You also pay my hosting bills and maybe even help put decent beer in my fridge.'
