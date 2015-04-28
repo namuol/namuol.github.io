@@ -379,7 +379,7 @@ html class:'pre', ->
         #   text 'I also made a simple <a href="http://namuol.github.io/banal-duck">&quot;brain-training&quot; app</a> for desktop browsers.'
 
         section ->
-          text '<a href="http://namuol.github.io/game-title-generator">Sometimes</a> I make browsers do <a href="http://namuol.github.io/earf-html5">silly</a> <a href="http://namuol.github.io/cheet.js">things</a>.'
+          text '<a href="http://namuol.github.io/game-title-generator">Sometimes</a> I make <a href="http://namuol.github.io/phaker-news">browsers</a> do <a href="http://namuol.github.io/earf-html5">silly</a> <a href="http://namuol.github.io/cheet.js">things</a>.'
 
         section ->
           text 'I created <a href="http://namuol.github.io/cod">Cod</a> because I wanted to write better docs.'
