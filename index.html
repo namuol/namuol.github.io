@@ -376,7 +376,7 @@ I created <a href="http://namuol.github.io/cod">Cod</a> because I wanted to writ
       </div>
     </div>
     <script>var __slice = Array.prototype.slice;var __hasProp = Object.prototype.hasOwnProperty;var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };var __extends = function(child, parent) {  for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; }  function ctor() { this.constructor = child; }  ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype;  return child; };var __indexOf = Array.prototype.indexOf || function(item) {  for (var i = 0, l = this.length; i < l; i++) {    if (this[i] === item) return i;  } return -1; };(function () {
-      var animateGoogles, blink, doom, godmode, googleAnim, googles, googling, iddqd_imgs, idx, imgidx, imgs, seq, setImg, transitioned;
+      var animateGoogles, blink, doom, godmode, googleAnim, googles, googling, iddqd_imgs, idx, imgidx, imgs, minAngle, seq, setImg, transitioned;
       (function() {
         var lastTime, vendors, x;
         lastTime = 0;
@@ -418,6 +418,9 @@ I created <a href="http://namuol.github.io/cod">Cod</a> because I wanted to writ
       godmode = false;
       googling = false;
       googleAnim = null;
+      minAngle = function(ang) {
+        return Math.atan2(Math.sin(ang), Math.cos(ang));
+      };
       animateGoogles = function() {
         googleAnim = window.requestAnimationFrame(animateGoogles);
         return $('.google > div').each(function(i) {
@@ -427,13 +430,13 @@ I created <a href="http://namuol.github.io/cod">Cod</a> because I wanted to writ
           ang = (_ref = g.data('ang')) != null ? _ref : 0;
           angv = (_ref1 = g.data('angv')) != null ? _ref1 : 0;
           tang = (_ref2 = g.data('tang')) != null ? _ref2 : 0;
-          tangv = tang - ang;
-          angv += (tangv - angv) * 0.08;
+          tangv = minAngle(tang - ang);
+          angv += minAngle((tangv - angv) * 0.08);
           ang += angv;
           g.css({
             transform: "rotate(" + (ang + Math.PI / 2) + "rad)"
           });
-          g.data('ang', ang);
+          g.data('ang', minAngle(ang));
           g.data('angv', angv);
           d = (_ref3 = g.data('d')) != null ? _ref3 : 0;
           dv = (_ref4 = g.data('dv')) != null ? _ref4 : 0;
@@ -560,7 +563,7 @@ I created <a href="http://namuol.github.io/cod">Cod</a> because I wanted to writ
           var _this = this;
           $(this).hide();
           $(this).data({
-            tang: Math.PI * 2 * Math.random()
+            tang: minAngle(Math.PI * 2 * Math.random())
           });
           return setTimeout(function() {
             return $(_this).show();
@@ -622,7 +625,7 @@ I created <a href="http://namuol.github.io/cod">Cod</a> because I wanted to writ
                   nah = true;
                   return;
                 }
-                tang = Math.atan2(dy, dx);
+                tang = minAngle(Math.atan2(dy, dx));
                 return g.data('tang', tang);
               });
             });

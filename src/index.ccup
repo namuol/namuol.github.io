@@ -434,7 +434,7 @@ html class:'pre', ->
       #   el.hide()
       #   $('body').append el
       #   el.attr('src', url)
-            
+      minAngle = (ang) -> Math.atan2(Math.sin(ang), Math.cos(ang)) 
       animateGoogles = ->
         googleAnim = window.requestAnimationFrame animateGoogles
         $('.google > div').each (i) ->
@@ -444,11 +444,11 @@ html class:'pre', ->
           ang = g.data('ang') ? 0
           angv = g.data('angv') ? 0
           tang = g.data('tang') ? 0
-          tangv = tang - ang
-          angv += (tangv - angv) * 0.08
+          tangv = minAngle tang - ang
+          angv += minAngle (tangv - angv) * 0.08
           ang += angv
           g.css transform: "rotate(#{ang + Math.PI/2}rad)"
-          g.data 'ang', ang
+          g.data 'ang', minAngle ang
           g.data 'angv', angv
 
           d = g.data('d') ? 0
@@ -560,7 +560,7 @@ html class:'pre', ->
       blink = ->
         $('.google > div').each (i) ->
           $(@).hide()
-          $(@).data tang: Math.PI * 2 * Math.random()
+          $(@).data tang: minAngle Math.PI * 2 * Math.random()
           setTimeout =>
             $(@).show()
           , 50
@@ -616,7 +616,7 @@ html class:'pre', ->
                 if i is 0 and Math.sqrt(dx*dx + dy*dy) > 250
                   nah = true
                   return
-                tang = Math.atan2 dy, dx
+                tang = minAngle Math.atan2 dy, dx
                 g.data 'tang', tang
           , 1000
 
